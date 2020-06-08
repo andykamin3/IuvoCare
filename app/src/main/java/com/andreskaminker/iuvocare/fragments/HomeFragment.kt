@@ -1,9 +1,10 @@
 package com.andreskaminker.iuvocare.fragments
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import android.widget.Button
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,12 +14,7 @@ import com.andreskaminker.iuvocare.dtypes.MedicationRequest
 import com.andreskaminker.iuvocare.dtypes.Patient
 import com.andreskaminker.iuvocare.dtypes.PatientActions
 import com.andreskaminker.iuvocare.helpers.ActionAdapter
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
-import java.sql.Time
-import java.sql.Timestamp
-import java.time.Instant
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 
 class HomeFragment : Fragment() {
@@ -26,7 +22,6 @@ class HomeFragment : Fragment() {
     private lateinit var v: View
     private lateinit var actionDisplay: RecyclerView
     private lateinit var viewAdapter: ActionAdapter
-    private lateinit var fabButton: FloatingActionButton
     private val currentPatient = Patient(123, "Andy")
     private val patientActions = arrayListOf<PatientActions>(
         MedicationRequest(111, "Ritalin 15mg", currentPatient, "18-07 19:30"),
@@ -48,19 +43,18 @@ class HomeFragment : Fragment() {
             layoutManager = linearLayoutManager
             adapter = viewAdapter
         }
-        fabButton = v.findViewById(R.id.fab)
         return v
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
     override fun onStart() {
-        super.onStart()
-        fabButton.setOnClickListener{
+        val appBar = this.requireActivity().findViewById<View>(R.id.bar_coordinator_layout)
+        appBar.visibility = View.VISIBLE
+        appBar.fab.setOnClickListener {
             val directions = HomeFragmentDirections.actionFragmentHomeToAddAppointmentFragment()
             v.findNavController().navigate(directions)
         }
+        super.onStart()
+
 
     }
 

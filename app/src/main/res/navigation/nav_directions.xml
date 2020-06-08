@@ -40,13 +40,16 @@
         android:id="@+id/fragmentHome"
         android:name="com.andreskaminker.iuvocare.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_fragmentHome_to_addAppointmentFragment"
             app:destination="@id/addAppointmentFragment" />
         <action
             android:id="@+id/action_fragmentHome_to_addMedicationFragment"
             app:destination="@id/addMedicationFragment" />
+        <action
+            android:id="@+id/action_fragmentHome_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
     </fragment>
     <fragment
         android:id="@+id/addAppointmentFragment"
@@ -64,9 +67,14 @@
         android:id="@+id/addMedicationFragment"
         android:name="com.andreskaminker.iuvocare.fragments.AddMedicationFragment"
         android:label="fragment_add_medication"
-        tools:layout="@layout/fragment_add_medication" >
+        tools:layout="@layout/fragment_add_medication">
         <action
             android:id="@+id/action_addMedicationFragment_to_addAppointmentFragment"
             app:destination="@id/addAppointmentFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.andreskaminker.iuvocare.fragments.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
 </navigation>
