@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_directions"
+    app:startDestination="@id/authFragment">
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.andreskaminker.iuvocare.fragments.AuthFragment"
+        android:label="AuthFragment" >
+        <action
+            android:id="@+id/action_authFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_authFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_authFragment_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
+    </fragment>
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.andreskaminker.iuvocare.fragments.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.andreskaminker.iuvocare.fragments.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentHome"
+        android:name="com.andreskaminker.iuvocare.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_fragmentHome_to_addAppointmentFragment"
+            app:destination="@id/addAppointmentFragment" />
+        <action
+            android:id="@+id/action_fragmentHome_to_addMedicationFragment"
+            app:destination="@id/addMedicationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAppointmentFragment"
+        android:name="com.andreskaminker.iuvocare.fragments.AddAppointmentFragment"
+        android:label="fragment_add_appointment"
+        tools:layout="@layout/fragment_add_appointment" >
+        <action
+            android:id="@+id/action_addAppointmentFragment_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
+        <action
+            android:id="@+id/action_addAppointmentFragment_to_addMedicationFragment"
+            app:destination="@id/addMedicationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMedicationFragment"
+        android:name="com.andreskaminker.iuvocare.fragments.AddMedicationFragment"
+        android:label="fragment_add_medication"
+        tools:layout="@layout/fragment_add_medication" >
+        <action
+            android:id="@+id/action_addMedicationFragment_to_addAppointmentFragment"
+            app:destination="@id/addAppointmentFragment" />
+    </fragment>
+</navigation>
