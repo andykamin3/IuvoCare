@@ -22,13 +22,13 @@ class HomeFragment : Fragment() {
     private lateinit var v: View
     private lateinit var actionDisplay: RecyclerView
     private lateinit var viewAdapter: ActionAdapter
-    private val currentPatient = Patient(123, "Andy")
+    private val currentPatient = Patient("123", "Andy", "andykamin3@gmail.com", "")
     private val patientActions = arrayListOf<PatientActions>(
-        MedicationRequest(111, "Ritalin 15mg", currentPatient, "18-07 19:30"),
-        MedicationRequest(110, "Ibuprofeno 200mg", currentPatient, "18-07 20:30"),
-        Appointment(304, "Dr. Korenblit", currentPatient, "10-07 10:00"),
-        Appointment(304, "Dra. Levy", currentPatient, "13-07 10:00")
-        )
+        MedicationRequest("111", "Ritalin 15mg", currentPatient, "18-07 19:30"),
+        MedicationRequest("110", "Ibuprofeno 200mg", currentPatient, "18-07 20:30"),
+        Appointment("304", "Dr. Korenblit", currentPatient, "10-07 10:00"),
+        Appointment("304", "Dra. Levy", currentPatient, "13-07 10:00")
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

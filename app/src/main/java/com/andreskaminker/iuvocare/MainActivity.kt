@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         barLayout = findViewById(R.id.bar_coordinator_layout)
         fabButton = findViewById(R.id.fab)
         navController = Navigation.findNavController(this, R.id.fragment)
-        barLayout.visibility = View.INVISIBLE
+        barLayout.visibility = View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -52,9 +52,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
         return true
     }
-
-
 }

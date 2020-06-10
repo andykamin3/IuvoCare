@@ -1,5 +1,3 @@
 package com.andreskaminker.iuvocare.dtypes
 
-class Patient (val id: Int, val name_given: String){
-
-}
+data class Patient(val id: String, val name_given: String, val email: String, val helper: String?)
