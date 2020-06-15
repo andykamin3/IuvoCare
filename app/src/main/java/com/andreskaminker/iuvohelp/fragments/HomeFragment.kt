@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
     private lateinit var v: View
     private lateinit var actionDisplay: RecyclerView
     private lateinit var viewAdapter: ActionAdapter
-    private val currentPatient = Patient("123", "Andy", "andykamin3@gmail.com", arrayOf(""))
+    private val currentPatient = Patient("123", "Andy", "andykamin3@gmail.com", "")
     private val patientActions = arrayListOf<PatientActions>(
         MedicationRequest("111", "Ritalin 15mg", currentPatient, "18-07 19:30"),
         MedicationRequest("110", "Ibuprofeno 200mg", currentPatient, "18-07 20:30"),
