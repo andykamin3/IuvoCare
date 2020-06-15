@@ -32,7 +32,10 @@
     <string name="week_days">Agregar Días de la Semana</string>
     <string name="auth_error">Error en la Autenticación</string>
     <string name="user_config">Configuración del Perfil</string>
+    <string name="user_placeholder">andykamin3@gmail.com</string>
     <string name="mail_prompt">E-Mail del Paciente</string>
+    <string name="add_user">Agregar Usuario</string>
+    <string name="search">Buscar</string>
     <string name="pass_parameters">Tu contraseña debe contener aunque sea un número</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
