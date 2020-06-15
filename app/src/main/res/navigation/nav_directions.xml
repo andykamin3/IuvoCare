@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/authFragment"
         android:name="com.andreskaminker.iuvocare.fragments.AuthFragment"
-        android:label="AuthFragment" >
+        android:label="AuthFragment">
         <action
             android:id="@+id/action_authFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_authFragment_to_fragmentHome"
             app:destination="@id/fragmentHome" />
+        <action
+            android:id="@+id/action_authFragment_to_userConfigFragment"
+            app:destination="@id/userConfigFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -77,4 +80,13 @@
         android:name="com.andreskaminker.iuvocare.fragments.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/userConfigFragment"
+        android:name="com.andreskaminker.iuvocare.fragments.UserConfigFragment"
+        android:label="fragment_user_config"
+        tools:layout="@layout/fragment_user_config">
+        <action
+            android:id="@+id/action_userConfigFragment_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
+    </fragment>
 </navigation>

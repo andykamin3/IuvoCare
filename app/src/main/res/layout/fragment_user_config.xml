@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.nscren.UserConfigFragment">
+    tools:context=".fragments.UserConfigFragment">
 
     <TextView
         android:id="@+id/textView7"
@@ -49,4 +49,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPatientMail" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.fragments.nscren
+package com.andreskaminker.iuvocare.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
