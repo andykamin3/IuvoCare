@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.dtypes.Helper
-import com.andreskaminker.iuvocare.dtypes.Patient
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -75,13 +74,13 @@ class SignUpFragment : Fragment() {
                         .setDisplayName(name)
                         .build()
                     user!!.updateProfile(profileUpdates)
-                    val patientData = Patient(
+                    val helperData = Helper(
                         id = user.uid,
                         name_given = name,
                         email = email,
-                        helper = arrayOf("")
+                        helped = arrayOf("")
                     )
-                    db.collection("patients").document(patientData.id).set(patientData)
+                    db.collection("helpers").document(helperData.id).set(helperData)
                     goToUserPreferences()
                 } else {
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
