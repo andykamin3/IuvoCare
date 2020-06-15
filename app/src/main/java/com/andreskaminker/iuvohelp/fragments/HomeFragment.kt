@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.fragments
+package com.andreskaminker.iuvohelp.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.andreskaminker.iuvocare.R
-import com.andreskaminker.iuvocare.dtypes.Appointment
-import com.andreskaminker.iuvocare.dtypes.MedicationRequest
-import com.andreskaminker.iuvocare.dtypes.Patient
-import com.andreskaminker.iuvocare.dtypes.PatientActions
-import com.andreskaminker.iuvocare.helpers.ActionAdapter
+import com.andreskaminker.iuvohelp.R
+import com.andreskaminker.iuvohelp.dtypes.Appointment
+import com.andreskaminker.iuvohelp.dtypes.MedicationRequest
+import com.andreskaminker.iuvohelp.dtypes.Patient
+import com.andreskaminker.iuvohelp.dtypes.PatientActions
+import com.andreskaminker.iuvohelp.helpers.ActionAdapter
 import kotlinx.android.synthetic.main.activity_main.view.*
 
 

@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.dtypes
+package com.andreskaminker.iuvohelp.dtypes
 
 data class MedicationRequest(
     val id: String,

@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare
+package com.andreskaminker.iuvohelp
 
 import android.os.Bundle
 import android.util.Log

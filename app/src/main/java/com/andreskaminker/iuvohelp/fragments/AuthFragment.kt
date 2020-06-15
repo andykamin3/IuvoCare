@@ -1,14 +1,12 @@
-package com.andreskaminker.iuvocare.fragments
+package com.andreskaminker.iuvohelp.fragments
 
 import android.os.Bundle
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.*
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.andreskaminker.iuvocare.R
+import com.andreskaminker.iuvohelp.R
 import com.google.android.material.tabs.TabLayout
 
 class AuthFragment : Fragment() {

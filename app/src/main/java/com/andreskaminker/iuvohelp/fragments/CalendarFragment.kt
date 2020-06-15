@@ -1,11 +1,11 @@
-package com.andreskaminker.iuvocare.fragments
+package com.andreskaminker.iuvohelp.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.andreskaminker.iuvocare.R
+import com.andreskaminker.iuvohelp.R
 
 class CalendarFragment : Fragment() {
 

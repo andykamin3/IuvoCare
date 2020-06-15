@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.fragments
+package com.andreskaminker.iuvohelp.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.andreskaminker.iuvocare.R
+import com.andreskaminker.iuvohelp.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 

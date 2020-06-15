@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IuvoCare</string>
+    <string name="app_name">IuvoHelp</string>
 
     <string name="home_title">Inicio</string>
     <string name="log_in">Iniciar Sesión</string>

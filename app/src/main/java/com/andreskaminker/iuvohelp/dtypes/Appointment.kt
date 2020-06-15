@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.dtypes
+package com.andreskaminker.iuvohelp.dtypes
 
 data class Appointment(
     val id: String,

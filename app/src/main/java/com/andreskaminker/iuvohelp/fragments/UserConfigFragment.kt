@@ -1,11 +1,11 @@
-package com.andreskaminker.iuvocare.fragments
+package com.andreskaminker.iuvohelp.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.andreskaminker.iuvocare.R
+import com.andreskaminker.iuvohelp.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

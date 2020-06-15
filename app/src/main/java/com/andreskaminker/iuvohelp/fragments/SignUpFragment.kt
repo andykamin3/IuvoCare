@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.fragments
+package com.andreskaminker.iuvohelp.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.andreskaminker.iuvocare.R
-import com.andreskaminker.iuvocare.dtypes.Helper
-import com.andreskaminker.iuvocare.dtypes.Patient
+import com.andreskaminker.iuvohelp.R
+import com.andreskaminker.iuvohelp.dtypes.Patient
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
