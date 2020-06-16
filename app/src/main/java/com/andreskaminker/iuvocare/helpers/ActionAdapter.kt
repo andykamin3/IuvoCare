@@ -17,7 +17,7 @@ class ActionAdapter (private val patientActions: ArrayList<PatientActions>): Rec
         val cv = cardView
         val textViewMain: TextView = cv.findViewById(R.id.textViewMain)
         val textViewName: TextView = cv.findViewById(R.id.textViewName)
-        val textViewKind: TextView = cv.findViewById(R.id.textViewMain)
+        val textViewKind: TextView = cv.findViewById(R.id.textViewKind)
         val textViewStatus: TextView = cv.findViewById(R.id.textViewStatus)
         val textViewTime: TextView = cv.findViewById(R.id.textViewTime)
     }

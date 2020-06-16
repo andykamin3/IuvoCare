@@ -78,7 +78,7 @@ class SignUpFragment : Fragment() {
                         id = user.uid,
                         name_given = name,
                         email = email,
-                        helped = arrayOf("")
+                        helped = ""
                     )
                     db.collection("helpers").document(helperData.id).set(helperData)
                     goToUserPreferences()

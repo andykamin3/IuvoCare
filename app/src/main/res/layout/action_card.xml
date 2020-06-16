@@ -18,7 +18,7 @@
         android:paddingBottom="3dp">
 
         <TextView
-            android:id="@+id/textViewUser"
+            android:id="@+id/textViewMain"
             style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,12 +33,12 @@
             style="@style/TextAppearance.MaterialComponents.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="11dp"
             android:text="@string/patient_name_placeholder"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf=""
-            app:layout_constraintTop_toBottomOf="" />
+            app:layout_constraintEnd_toEndOf="@+id/textViewMain"
+            app:layout_constraintStart_toEndOf="@+id/textViewMain"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMain" />
 
         <TextView
             android:id="@+id/textViewKind"
@@ -66,11 +66,13 @@
             android:id="@+id/textViewStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/status_placeholder"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textViewName"
-            app:layout_constraintTop_toBottomOf="" />
+            app:layout_constraintEnd_toEndOf="@+id/textViewUser"
+            app:layout_constraintStart_toStartOf="@+id/textViewMain"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMain" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
