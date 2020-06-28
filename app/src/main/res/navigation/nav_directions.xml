@@ -58,13 +58,16 @@
         android:id="@+id/addAppointmentFragment"
         android:name="com.andreskaminker.iuvocare.fragments.AddAppointmentFragment"
         android:label="fragment_add_appointment"
-        tools:layout="@layout/fragment_add_appointment" >
+        tools:layout="@layout/fragment_add_appointment">
         <action
             android:id="@+id/action_addAppointmentFragment_to_fragmentHome"
             app:destination="@id/fragmentHome" />
         <action
             android:id="@+id/action_addAppointmentFragment_to_addMedicationFragment"
             app:destination="@id/addMedicationFragment" />
+        <action
+            android:id="@+id/action_addAppointmentFragment_to_authFragment"
+            app:destination="@id/authFragment" />
     </fragment>
     <fragment
         android:id="@+id/addMedicationFragment"
@@ -79,7 +82,11 @@
         android:id="@+id/calendarFragment"
         android:name="com.andreskaminker.iuvocare.fragments.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar">
+        <action
+            android:id="@+id/action_calendarFragment_to_addAppointmentFragment"
+            app:destination="@id/addAppointmentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userConfigFragment"
         android:name="com.andreskaminker.iuvocare.fragments.UserConfigFragment"

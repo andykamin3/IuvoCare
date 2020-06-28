@@ -5,4 +5,12 @@ data class Patient(
     val name_given: String,
     val email: String,
     val helper: String
-)
+) {
+    constructor() : this(
+        "",
+        "",
+        "",
+        ""
+    ) { //Empty constructor for Firebase deserialization purposes}
+    }
+}

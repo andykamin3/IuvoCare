@@ -11,7 +11,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
@@ -47,9 +46,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.history_opt -> {
                 navController.navigate(R.id.calendarFragment)
-                appBar.fab.setOnClickListener {
-                    navController.navigate(R.id.addAppointmentFragment)
-                }
+                // TODO: UINavigation Implementation :))
             }
         }
         return true

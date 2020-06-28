@@ -8,15 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.dtypes.ActionKind
 import com.andreskaminker.iuvocare.dtypes.Appointment
-import com.andreskaminker.iuvocare.dtypes.MedicationRequest
 import com.andreskaminker.iuvocare.dtypes.PatientActions
-import kotlinx.android.synthetic.main.action_card.view.*
 
-class ActionAdapter (private val patientActions: ArrayList<PatientActions>): RecyclerView.Adapter<ActionAdapter.ActionViewHolder>()  {
+class AdapterAction(private val patientActions: ArrayList<PatientActions>) :
+    RecyclerView.Adapter<AdapterAction.ActionViewHolder>() {
     class ActionViewHolder(val cardView: CardView) : RecyclerView.ViewHolder(cardView) {
         val cv = cardView
         val textViewMain: TextView = cv.findViewById(R.id.textViewMain)
-        val textViewName: TextView = cv.findViewById(R.id.textViewName)
         val textViewKind: TextView = cv.findViewById(R.id.textViewKind)
         val textViewStatus: TextView = cv.findViewById(R.id.textViewStatus)
         val textViewTime: TextView = cv.findViewById(R.id.textViewTime)
@@ -36,18 +34,11 @@ class ActionAdapter (private val patientActions: ArrayList<PatientActions>): Rec
         if(patientActions[position].kind == ActionKind.APPOINTMENT) {
             val element = patientActions[position] as Appointment
             holder.textViewMain.text = element.description
-            holder.textViewTime.text = element.scheduledFor
-            holder.textViewTime.text = element.patient.name_given
+            holder.textViewTime.text =
+                "${element.scheduledFor.mDay}-${element.scheduledFor.mMonth}-${element.scheduledFor.mYear}  ${element.scheduledFor.mHour}:${element.scheduledFor.mMinutes} "
+
             holder.textViewStatus.text = element.status.toString()
-        } else if(patientActions[position].kind == ActionKind.MEDICATION) {
-            val element = patientActions[position] as MedicationRequest
-            holder.textViewMain.text = element.medication
-            holder.textViewTime.text = element.scheduledFor
-            holder.textViewTime.text = element.patient.name_given
-            holder.textViewStatus.text = element.status.toString()
-            holder.cardView.textViewStatus.text = element.status.toString()
         }
-        holder.cardView.textViewKind.text = patientActions[position].kind.toString()
 
     }
 }

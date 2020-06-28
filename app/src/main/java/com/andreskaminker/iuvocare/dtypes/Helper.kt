@@ -5,4 +5,10 @@ data class Helper(
     val name_given: String,
     val email: String,
     val helped: String
-)
+) {
+
+    constructor() : this("", "", "", "") { //Empty constructor for Firebase deserialization purposes
+
+    }
+
+}

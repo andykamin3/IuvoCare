@@ -3,15 +3,20 @@ package com.andreskaminker.iuvocare.fragments.nscren
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import java.util.*
 
 class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
+    lateinit var mCallback: DatePickerDialog.OnDateSetListener
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        // Use the current date as the default date in the picker
+
+        try {
+            mCallback = parentFragment as DatePickerDialog.OnDateSetListener
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$activity must implement OnTimePickedListener.")
+        }
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
@@ -24,6 +29,8 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        Log.d("DatePickerFragment", "Year: $year, Month: $month, Day: $day")
+        if (mCallback != null) {
+            mCallback.onDateSet(view, year, month, day)
+        }
     }
 }

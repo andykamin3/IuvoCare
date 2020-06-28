@@ -1,19 +1,24 @@
 package com.andreskaminker.iuvocare.fragments.nscren
 
-import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
 import android.os.Bundle
-import android.util.Log
-import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
 import java.util.*
 
+
 class TimePickerFragment : DialogFragment(), OnTimeSetListener {
+    lateinit var mCallback: OnTimeSetListener
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+        try {
+            mCallback = parentFragment as OnTimeSetListener
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$activity must implement OnTimePickedListener.")
+        }
         // Use the current date as the default date in the picker
         val c = Calendar.getInstance()
         val minutes = c.get(Calendar.MINUTE)
@@ -24,6 +29,10 @@ class TimePickerFragment : DialogFragment(), OnTimeSetListener {
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        Log.d("TimePicker", "Hour: $hourOfDay, Minute: $minute")
+        if (mCallback != null) {
+            mCallback.onTimeSet(view, hourOfDay, minute)
+        }
     }
+
+
 }
