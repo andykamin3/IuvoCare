@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.R
@@ -71,8 +70,9 @@ class HomeFragment : Fragment() { //TODO: Add implementation of tabbed display.
         val appBar = requireActivity().findViewById<View>(R.id.bar_coordinator_layout)
         appBar.visibility = View.VISIBLE
         appBar.fab.setOnClickListener {
-            val directions = HomeFragmentDirections.actionFragmentHomeToAddAppointmentFragment()
+            /*val directions = HomeFragmentDirections.actionFragmentHomeToAddAppointmentFragment()
             v.findNavController().navigate(directions)
+             */
         }
         super.onStart()
     }

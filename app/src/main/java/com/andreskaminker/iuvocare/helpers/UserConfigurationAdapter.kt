@@ -17,7 +17,7 @@ class UserConfigurationAdapter(private val patientActions: ArrayList<Patient>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserConfigurationHolder {
         val cardView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.user_card, parent, false) as CardView
+            .inflate(R.layout.card_user, parent, false) as CardView
         return UserConfigurationHolder(cardView)
     }
 

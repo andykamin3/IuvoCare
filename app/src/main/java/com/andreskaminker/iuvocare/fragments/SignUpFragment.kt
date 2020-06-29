@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.dtypes.Helper
 import com.google.android.material.snackbar.Snackbar
@@ -97,7 +96,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun goToUserPreferences() {
-        val directions = AuthFragmentDirections.actionAuthFragmentToFragmentHome()
-        parentFragment?.findNavController()?.navigate(directions)
+        //TODO: Go to user preferences
     }
+
 }

@@ -157,9 +157,7 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     }
 
     private fun goToAuth() {
-        val directions =
-            AddAppointmentFragmentDirections.actionAddAppointmentFragmentToAuthFragment()
-        v.findNavController().navigate(directions)
+        //TODO: Go back to auth
     }
 
 

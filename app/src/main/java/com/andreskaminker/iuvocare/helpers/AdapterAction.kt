@@ -22,7 +22,7 @@ class AdapterAction(private val patientActions: ArrayList<PatientActions>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActionViewHolder {
         val cardView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.action_card, parent, false) as CardView
+            .inflate(R.layout.card_action, parent, false) as CardView
         return ActionViewHolder(cardView)
     }
 

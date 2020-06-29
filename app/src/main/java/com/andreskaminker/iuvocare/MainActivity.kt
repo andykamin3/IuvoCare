@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.navigation.NavController
@@ -26,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         barLayout = findViewById(R.id.bar_coordinator_layout)
         fabButton = findViewById(R.id.fab)
         navController = Navigation.findNavController(this, R.id.fragment)
-        barLayout.visibility = View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -42,7 +40,6 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.fragmentHome -> {
                 navController.navigate(R.id.fragmentHome)
-
             }
             R.id.history_opt -> {
                 navController.navigate(R.id.calendarFragment)
