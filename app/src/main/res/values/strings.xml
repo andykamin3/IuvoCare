@@ -3,6 +3,8 @@
 
     <string name="home_title">Inicio</string>
     <string name="log_in">Iniciar Sesión</string>
+    <string name="log_out">Cerrar Sesión</string>
+    <string name="change_pwd">Cambiar Contraseña</string>
     <string name="sign_up">Registrate</string>
     <string name="name_des">Nombre y Apellido</string>
     <string name="email_des">Dirección de Correo Electrónico</string>
@@ -31,6 +33,7 @@
     <string name="medication_name">Nombre del Medicamento</string>
     <string name="week_days">Agregar Días de la Semana</string>
     <string name="auth_error">Error en la Autenticación</string>
+    <string name="user">Perfil</string>
     <string name="user_config">Configuración del Perfil</string>
     <string name="user_placeholder">andykamin3@gmail.com</string>
     <string name="mail_prompt">E-Mail del Paciente</string>

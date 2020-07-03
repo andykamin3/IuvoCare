@@ -53,4 +53,9 @@
             android:id="@+id/action_homeTabbedScreen_to_addAppointmentFragment"
             app:destination="@id/addAppointmentFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.andreskaminker.iuvocare.fragments.ProfileFragment"
+        android:label="profileFragment"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

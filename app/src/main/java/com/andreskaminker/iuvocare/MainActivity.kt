@@ -37,9 +37,10 @@ class MainActivity : AppCompatActivity() {
         when (item!!.itemId) {
             R.id.profile_opt -> {
                 Log.d(TAG, "Fav menu item is clicked!")
+                navController.navigate(R.id.profileFragment)
             }
             R.id.fragmentHome -> {
-                navController.navigate(R.id.fragmentHome)
+                navController.navigate(R.id.homeTabbedScreen)
             }
             R.id.history_opt -> {
                 navController.navigate(R.id.calendarFragment)
