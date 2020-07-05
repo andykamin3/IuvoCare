@@ -40,7 +40,7 @@
             app:layout_constraintTop_toTopOf="@+id/textViewMain" />
 
         <TextView
-            android:id="@+id/textViewTime"
+            android:id="@+id/textViewMedicationTime"
             style="@style/TextAppearance.MaterialComponents.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,7 +1,6 @@
 package com.andreskaminker.iuvocare.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,7 @@ import androidx.navigation.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.andreskaminker.iuvocare.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
-import com.google.firebase.auth.FirebaseAuth
 
 class HomeTabbedScreen : Fragment() {
 
@@ -22,6 +19,7 @@ class HomeTabbedScreen : Fragment() {
     private lateinit var homeScreenAdapter: ScreenPageAdapter
     private lateinit var viewPager: ViewPager
     private lateinit var tabLayout: TabLayout
+
     private lateinit var appBar: View
     lateinit var fab: FloatingActionButton
 
@@ -64,8 +62,7 @@ class HomeTabbedScreen : Fragment() {
                         v.findNavController().navigate(directions)
                     }
 
-                }
-                else {
+                } else {
                     setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_post_add_24))
                     setOnClickListener {
                         val directions =
@@ -73,7 +70,7 @@ class HomeTabbedScreen : Fragment() {
                         v.findNavController().navigate(directions)
                     }
                 }
-                }
+            }
 
             return if (position == 0) {
                 SeeMedicationFragment()

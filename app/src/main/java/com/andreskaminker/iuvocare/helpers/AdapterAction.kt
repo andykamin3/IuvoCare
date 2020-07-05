@@ -17,7 +17,7 @@ class AdapterAction(private val patientActions: ArrayList<PatientActions>) :
         val textViewMain: TextView = cv.findViewById(R.id.textViewMain)
         val textViewKind: TextView = cv.findViewById(R.id.textViewKind)
         val textViewStatus: TextView = cv.findViewById(R.id.textViewStatus)
-        val textViewTime: TextView = cv.findViewById(R.id.textViewTime)
+        val textViewTime: TextView = cv.findViewById(R.id.textViewMedicationTime)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActionViewHolder {
