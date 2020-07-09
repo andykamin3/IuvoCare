@@ -55,7 +55,7 @@ class HomeTabbedScreen : Fragment() {
         override fun getItem(position: Int): Fragment {
             fab.apply {
                 if (position == 0) {
-                    setImageDrawable(resources.getDrawable(R.drawable.ic_pill))
+                    setImageDrawable(resources.getDrawable(R.drawable.ic_pill_w))
                     setOnClickListener {
                         val directions =
                             HomeTabbedScreenDirections.actionHomeTabbedScreenToAddMedicationFragment()
@@ -63,7 +63,7 @@ class HomeTabbedScreen : Fragment() {
                     }
 
                 } else {
-                    setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_post_add_24))
+                    setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_post_add_24_w))
                     setOnClickListener {
                         val directions =
                             HomeTabbedScreenDirections.actionHomeTabbedScreenToAddAppointmentFragment()

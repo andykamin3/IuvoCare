@@ -125,7 +125,7 @@ class CalendarFragment : Fragment() {
 
     private fun updateUI() {
         fab.apply {
-            setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_post_add_24))
+            setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_post_add_24_w))
             setOnClickListener {
                 val directions =
                     CalendarFragmentDirections.actionCalendarFragmentToAddAppointmentFragment()

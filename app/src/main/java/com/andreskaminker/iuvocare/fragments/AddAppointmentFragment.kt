@@ -116,7 +116,7 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
                 }
         }
         fab.apply {
-            setImageDrawable(resources.getDrawable(R.drawable.ic_pill))
+            setImageDrawable(resources.getDrawable(R.drawable.ic_pill_w))
             setOnClickListener {
                 val directions =
                     AddAppointmentFragmentDirections.actionAddAppointmentFragmentToAddMedicationFragment()

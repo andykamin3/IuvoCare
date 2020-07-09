@@ -4,20 +4,20 @@
 
     <item
         android:id="@+id/profile_opt"
-        android:icon="@drawable/ic_baseline_person_24"
+        android:icon="@drawable/ic_baseline_person_24_w"
         android:title="@string/profile_menu"
         android:contentDescription="@string/profile_menu"
         app:showAsAction="never
 " />
     <item
         android:id="@+id/fragmentHome"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/ic_baseline_home_24_w"
         android:title="@string/home_title"
         android:contentDescription="@string/home_title"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/history_opt"
-        android:icon="@drawable/ic_baseline_history_24"
+        android:icon="@drawable/ic_baseline_history_24_w"
         android:title="@string/history"
         android:contentDescription="@string/med_history"
         app:showAsAction="ifRoom" />

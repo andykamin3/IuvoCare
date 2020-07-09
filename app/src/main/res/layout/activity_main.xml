@@ -34,7 +34,7 @@
             app:layout_anchor="@+id/bar"
             app:layout_anchorGravity="bottom|center"
             app:menu="@menu/top_app_bar"
-            app:navigationIcon="@drawable/ic_baseline_menu_24" />
+            app:navigationIcon="@drawable/ic_baseline_menu_24_w" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
