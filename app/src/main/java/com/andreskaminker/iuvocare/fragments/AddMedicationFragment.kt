@@ -9,17 +9,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TimePicker
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import ca.antonious.materialdaypicker.MaterialDayPicker
 import com.andreskaminker.iuvocare.R
-import com.andreskaminker.iuvocare.dtypes.Config
 import com.andreskaminker.iuvocare.dtypes.MedicationRequest
 import com.andreskaminker.iuvocare.dtypes.Patient
 import com.andreskaminker.iuvocare.dtypes.TimeResult
 import com.andreskaminker.iuvocare.fragments.nscren.TimePickerFragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -27,8 +23,6 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     private val TAG = "AddMedicationFragment"
     private lateinit var v: View
     private lateinit var timeButton: Button
-    private lateinit var fab: FloatingActionButton
-    private lateinit var appBar: CoordinatorLayout
     private lateinit var materialPicker: MaterialDayPicker
     private lateinit var timeResult: TimeResult
     private var timeSet = false
@@ -46,18 +40,18 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         v = inflater.inflate(R.layout.fragment_add_medication, container, false)
         materialPicker = v.findViewById(R.id.day_picker)
         timeButton = v.findViewById(R.id.timeButton)
-        appBar = this.requireActivity().findViewById(R.id.bar_coordinator_layout)
         nameEditText = v.findViewById(R.id.editTextMedicationName)
         descriptionEditText = v.findViewById(R.id.editTextMedicationDescription)
         submitButton = v.findViewById(R.id.submitButton)
         imageButton = v.findViewById(R.id.imageButton)
-        fab = appBar.findViewById(R.id.fab)
+
         return v
     }
 
     override fun onStart() {
         super.onStart()
-        updateUI()
+
+
 
         timeButton.setOnClickListener {
             TimePickerFragment()
@@ -93,18 +87,6 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                 .make(v, "Por favor completar los campos obligatorios", Snackbar.LENGTH_SHORT)
                 .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE)
                 .show()
-        }
-    }
-
-    private fun updateUI() {
-        materialPicker.locale = Config.default_locale
-        fab.apply {
-            setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_post_add_24_w))
-            setOnClickListener {
-                val directions =
-                    AddMedicationFragmentDirections.actionAddMedicationFragmentToAddAppointmentFragment()
-                v.findNavController().navigate(directions)
-            }
         }
     }
 

@@ -1,52 +1,58 @@
 package com.andreskaminker.iuvocare
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
-    lateinit var appBar: BottomAppBar
+    lateinit var bottomAppBar: BottomAppBar
     lateinit var navController: NavController
-    lateinit var barLayout: CoordinatorLayout
-    lateinit var fabButton: FloatingActionButton
+    lateinit var navView: NavigationView
+    lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        appBar = findViewById(R.id.bar)
-        setSupportActionBar(appBar)
-        barLayout = findViewById(R.id.bar_coordinator_layout)
-        fabButton = findViewById(R.id.fab)
-        navController = Navigation.findNavController(this, R.id.fragment)
+        val navController = findNavController(R.id.fragment)
+        navView = findViewById(R.id.navView)
+        bottomAppBar = findViewById(R.id.bottomAppBar)
+        drawerLayout = findViewById(R.id.drawer_layout)
+        setSupportActionBar(this.bottomAppBar)
+        NavigationUI.setupWithNavController(navView, navController)
+        bottomAppBar.setNavigationOnClickListener {
+            if (drawerLayout.isOpen) {
+                drawerLayout.close()
+            } else {
+                drawerLayout.open()
+            }
+        }
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (drawerLayout.isOpen) {
+            drawerLayout.close()
+        } else {
+            drawerLayout.open()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.top_app_bar, menu)
-        return true
+        return false
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
-            R.id.profile_opt -> {
-                Log.d(TAG, "Fav menu item is clicked!")
-                navController.navigate(R.id.profileFragment)
-            }
-            R.id.fragmentHome -> {
-                navController.navigate(R.id.homeTabbedScreen)
-            }
-            R.id.history_opt -> {
-                navController.navigate(R.id.calendarFragment)
-                // TODO: UINavigation Implementation :))
-            }
-        }
         return true
     }
 }

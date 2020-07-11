@@ -48,4 +48,9 @@
     <string name="med_image_placeholder">This is the medication image</string>
     <string name="imagen_de_la_medicaci_n">Imagen de la Medicación</string>
     <string name="placeholder">TextView</string>
+    <string name="agregar_medicaci_n">Agregar Medicación</string>
+    <string name="agregar_cita_m_dica">Agregar Cita Médica</string>
+    <string name="perfil">Perfil</string>
+    <string name="inicio">Inicio</string>
+    <string name="calendario">Calendario</string>
 </resources>

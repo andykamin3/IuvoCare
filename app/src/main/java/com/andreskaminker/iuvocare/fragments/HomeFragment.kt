@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.dtypes.*
 import com.andreskaminker.iuvocare.helpers.AdapterAction
-import kotlinx.android.synthetic.main.activity_main.view.*
 
 
 class HomeFragment : Fragment() { //TODO: Add implementation of tabbed display.
@@ -64,17 +63,6 @@ class HomeFragment : Fragment() { //TODO: Add implementation of tabbed display.
             adapter = viewAdapter
         }
         return v
-    }
-
-    override fun onStart() {
-        val appBar = requireActivity().findViewById<View>(R.id.bar_coordinator_layout)
-        appBar.visibility = View.VISIBLE
-        appBar.fab.setOnClickListener {
-            /*val directions = HomeFragmentDirections.actionFragmentHomeToAddAppointmentFragment()
-            v.findNavController().navigate(directions)
-             */
-        }
-        super.onStart()
     }
 
 }

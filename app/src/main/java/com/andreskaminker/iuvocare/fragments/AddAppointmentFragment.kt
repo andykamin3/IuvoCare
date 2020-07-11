@@ -11,9 +11,7 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.TimePicker
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.dtypes.Appointment
 import com.andreskaminker.iuvocare.dtypes.DateResult
@@ -21,7 +19,6 @@ import com.andreskaminker.iuvocare.dtypes.Helper
 import com.andreskaminker.iuvocare.dtypes.Patient
 import com.andreskaminker.iuvocare.fragments.nscren.DatePickerFragment
 import com.andreskaminker.iuvocare.fragments.nscren.TimePickerFragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -33,8 +30,6 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     private lateinit var v: View
     private lateinit var dateButton: Button
     private lateinit var timeButton: Button
-    private lateinit var fab: FloatingActionButton
-    private lateinit var appBar: CoordinatorLayout
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
     private lateinit var submitButton: Button
@@ -57,8 +52,7 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         submitButton = v.findViewById(R.id.confirmButton)
         nameEditText = v.findViewById(R.id.editTextMedicationName)
         descriptionEditText = v.findViewById(R.id.editTextMedicationDescription)
-        appBar = this.requireActivity().findViewById(R.id.bar_coordinator_layout)
-        fab = appBar.findViewById(R.id.fab)
+
         return v
     }
 
@@ -114,14 +108,6 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
                             }
                     }
                 }
-        }
-        fab.apply {
-            setImageDrawable(resources.getDrawable(R.drawable.ic_pill_w))
-            setOnClickListener {
-                val directions =
-                    AddAppointmentFragmentDirections.actionAddAppointmentFragmentToAddMedicationFragment()
-                v.findNavController().navigate(directions)
-            }
         }
 
         dateButton.setOnClickListener {

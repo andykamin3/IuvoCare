@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.databinding.DayCalendarLayoutBinding
@@ -22,7 +21,6 @@ import com.andreskaminker.iuvocare.helpers.CalendarAdapter
 import com.andreskaminker.iuvocare.helpers.DummyData
 import com.andreskaminker.iuvocare.helpers.mapToABP
 import com.andreskaminker.iuvocare.helpers.mapToABPMonth
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
@@ -48,8 +46,7 @@ class CalendarFragment : Fragment() {
     private val selectionFormatter =
         DateTimeFormatter.ofPattern("d MMM yyyy").withLocale(Config.default_locale)
 
-    private lateinit var fab: FloatingActionButton
-    private lateinit var appBar: View
+
     private lateinit var v: View
     private lateinit var medicationRequests: MutableList<MedicationRequest>
     private lateinit var scheduledAppointments: MutableList<Appointment>
@@ -68,8 +65,7 @@ class CalendarFragment : Fragment() {
     ): View? {
         _binding = FragmentCalendarBinding.inflate(inflater, container, false)
         v = binding.root
-        appBar = this.requireActivity().findViewById(R.id.coordinatorLayout)
-        fab = appBar.findViewById(R.id.fab)
+
         return v
     }
 
@@ -205,14 +201,7 @@ class CalendarFragment : Fragment() {
 
 
     private fun updateUI() {
-        fab.apply {
-            setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_post_add_24_w))
-            setOnClickListener {
-                val directions =
-                    CalendarFragmentDirections.actionCalendarFragmentToAddAppointmentFragment()
-                v.findNavController().navigate(directions)
-            }
-        }
+
     }
 }
 
