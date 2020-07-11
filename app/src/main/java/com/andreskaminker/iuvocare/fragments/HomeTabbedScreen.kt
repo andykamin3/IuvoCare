@@ -55,7 +55,7 @@ class HomeTabbedScreen : Fragment() {
         override fun getItem(position: Int): Fragment {
             fab.apply {
                 if (position == 0) {
-                    setImageDrawable(resources.getDrawable(R.drawable.ic_pill_add_w))
+                    setImageDrawable(resources.getDrawable(R.drawable.ic_pill_w))
                     setOnClickListener {
                         val directions =
                             HomeTabbedScreenDirections.actionHomeTabbedScreenToAddMedicationFragment()
