@@ -18,6 +18,7 @@ class MedicationAdapter(private val medicationList: MutableList<MedicationReques
         val imageView: ImageView = cv.findViewById(R.id.imageViewMedication)
         val textViewTime: TextView = cv.findViewById(R.id.textViewMedicationTime)
         val cardView = cv.findViewById<CardView>(R.id.cardViewMedication)
+        //TAB
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicationHolder {
