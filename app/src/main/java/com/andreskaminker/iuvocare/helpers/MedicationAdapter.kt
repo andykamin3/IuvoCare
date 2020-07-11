@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.R
+import com.andreskaminker.iuvocare.dtypes.Config
 import com.andreskaminker.iuvocare.dtypes.MedicationRequest
+import org.threeten.bp.format.TextStyle
 
 class MedicationAdapter(private val medicationList: MutableList<MedicationRequest>) :
     RecyclerView.Adapter<MedicationAdapter.MedicationHolder>() {
@@ -37,7 +39,12 @@ class MedicationAdapter(private val medicationList: MutableList<MedicationReques
             textViewTime.text =
                 "${medicationList[position].takeTime.hour}:${medicationList[position].takeTime.minutes}"
             textViewMedicationName.text = medicationList[position].medication
-            textViewWeekdays.text = medicationList[position].scheduledFor.toString()
+            var weekString = ""
+            medicationList[position].scheduledFor.map {
+                weekString += (it.mapToABP()
+                    .getDisplayName(TextStyle.FULL, Config.default_locale) + " ")
+            }
+            textViewWeekdays.text = weekString
             //TODO: add image view support with Glide
 
         }
