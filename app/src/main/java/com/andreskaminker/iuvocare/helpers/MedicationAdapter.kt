@@ -6,13 +6,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.dtypes.Config
 import com.andreskaminker.iuvocare.dtypes.MedicationRequest
+import com.andreskaminker.iuvocare.modules.mapToABP
+import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
 import org.threeten.bp.format.TextStyle
 
-class MedicationAdapter(private val medicationList: MutableList<MedicationRequest>) :
+class MedicationAdapter(
+    private val medicationList: MutableList<MedicationRequest>,
+    val parent: Fragment
+) :
     RecyclerView.Adapter<MedicationAdapter.MedicationHolder>() {
     class MedicationHolder(cv: View) : RecyclerView.ViewHolder(cv) {
         val textViewMedicationName: TextView = cv.findViewById(R.id.textViewMedicationName)
@@ -45,7 +52,13 @@ class MedicationAdapter(private val medicationList: MutableList<MedicationReques
                     .getDisplayName(TextStyle.FULL, Config.default_locale) + " ")
             }
             textViewWeekdays.text = weekString
+            val imgRef =
+                FirebaseStorage.getInstance().reference.child(medicationList[position].imageURL)
             //TODO: add image view support with Glide
+            Glide.with(parent.requireActivity())
+                .load(imgRef)
+                .centerCrop()
+                .into(holder.imageView)
 
         }
     }

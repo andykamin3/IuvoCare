@@ -21,7 +21,7 @@ object DummyData {
                 "Ritalin 15mg",
                 currentPatient,
                 mutableListOf(MaterialDayPicker.Weekday.MONDAY),
-                "",
+                "images.jpg",
                 TimeResult(2, 30)
             )
         )
@@ -34,7 +34,7 @@ object DummyData {
                     MaterialDayPicker.Weekday.FRIDAY,
                     MaterialDayPicker.Weekday.WEDNESDAY
                 ),
-                "",
+                "medic.jpg",
                 TimeResult(10, 15)
             )
         )

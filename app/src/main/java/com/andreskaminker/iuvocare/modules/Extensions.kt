@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.helpers
+package com.andreskaminker.iuvocare.modules
 
 import android.os.Build
 import androidx.annotation.RequiresApi

@@ -19,8 +19,8 @@ import com.andreskaminker.iuvocare.dtypes.*
 import com.andreskaminker.iuvocare.dtypes.Config.daysOfWeekFromLocale
 import com.andreskaminker.iuvocare.helpers.CalendarAdapter
 import com.andreskaminker.iuvocare.helpers.DummyData
-import com.andreskaminker.iuvocare.helpers.mapToABP
-import com.andreskaminker.iuvocare.helpers.mapToABPMonth
+import com.andreskaminker.iuvocare.modules.mapToABP
+import com.andreskaminker.iuvocare.modules.mapToABPMonth
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner

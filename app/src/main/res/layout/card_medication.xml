@@ -54,8 +54,8 @@
 
             <ImageView
                 android:id="@+id/imageViewMedication"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:layout_marginTop="16dp"
                 android:contentDescription="@string/med_image_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -31,8 +31,7 @@ class SeeMedicationFragment : Fragment() {
         super.onStart()
 
         medicationList = DummyData.medicationRequests
-        medicationAdapter = MedicationAdapter(medicationList)
-        medicationAdapter = MedicationAdapter(medicationList)
+        medicationAdapter = MedicationAdapter(medicationList, this)
         recyclerView.apply {
             setHasFixedSize(true)
             adapter = medicationAdapter

@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.helpers
+package com.andreskaminker.iuvocare.modules
 
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes

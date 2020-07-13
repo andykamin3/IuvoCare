@@ -9,13 +9,14 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.andreskaminker.iuvocare.helpers.fabButtonHelpers
+import com.andreskaminker.iuvocare.modules.fabButtonHelpers
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
 
-class MainActivity : AppCompatActivity(), fabButtonHelpers {
+class MainActivity : AppCompatActivity(),
+    fabButtonHelpers {
     private val TAG = "MainActivity"
     lateinit var bottomAppBar: BottomAppBar
     lateinit var navController: NavController
