@@ -1,5 +1,6 @@
 package com.andreskaminker.iuvocare
 
+
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,20 +9,25 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.andreskaminker.iuvocare.helpers.fabButtonHelpers
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), fabButtonHelpers {
     private val TAG = "MainActivity"
     lateinit var bottomAppBar: BottomAppBar
     lateinit var navController: NavController
     lateinit var navView: NavigationView
     lateinit var drawerLayout: DrawerLayout
+    lateinit var fabButton: FloatingActionButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navController = findNavController(R.id.fragment)
         navView = findViewById(R.id.navView)
+        fabButton = findViewById(R.id.floatingActionButton)
         bottomAppBar = findViewById(R.id.bottomAppBar)
         drawerLayout = findViewById(R.id.drawer_layout)
         setSupportActionBar(this.bottomAppBar)
@@ -40,8 +46,6 @@ class MainActivity : AppCompatActivity() {
         super.onBackPressed()
         if (drawerLayout.isOpen) {
             drawerLayout.close()
-        } else {
-            drawerLayout.open()
         }
     }
 
@@ -55,4 +59,14 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return true
     }
+
+    override fun setFabDrawable(drawable: Int) {
+        fabButton.setImageDrawable(resources.getDrawable(drawable, this.theme))
+    }
+
+    override fun setFabColor(color: Int) {
+        TODO("Not yet implemented")
+    }
 }
+
+//TODO CHANGE getDrawable methods

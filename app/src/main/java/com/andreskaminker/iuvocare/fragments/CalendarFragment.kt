@@ -65,7 +65,6 @@ class CalendarFragment : Fragment() {
     ): View? {
         _binding = FragmentCalendarBinding.inflate(inflater, container, false)
         v = binding.root
-
         return v
     }
 
