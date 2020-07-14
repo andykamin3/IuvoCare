@@ -47,9 +47,9 @@ class HomeTabbedScreen : Fragment() {
             }
 
             return if (position == 0) {
-                SeeMedicationFragment()
+                SeeMedicationFragment.newInstance()
             } else {
-                SeeAppointmentFragment()
+                SeeAppointmentFragment.newInstance()
             }
         }
 

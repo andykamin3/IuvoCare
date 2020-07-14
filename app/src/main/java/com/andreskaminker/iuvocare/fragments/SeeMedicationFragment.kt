@@ -27,6 +27,15 @@ class SeeMedicationFragment : Fragment() {
         return v
     }
 
+    companion object {
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance() =
+            SeeMedicationFragment().apply {
+                arguments = Bundle().apply {}
+            }
+    }
+
     override fun onStart() {
         super.onStart()
 

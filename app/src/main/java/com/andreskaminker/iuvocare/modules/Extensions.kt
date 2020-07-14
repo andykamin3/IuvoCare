@@ -1,11 +1,9 @@
 package com.andreskaminker.iuvocare.modules
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import ca.antonious.materialdaypicker.MaterialDayPicker
+import com.andreskaminker.iuvocare.dtypes.Config
 import org.threeten.bp.DayOfWeek
-import java.time.Month
-
+import org.threeten.bp.format.DateTimeFormatter
 
 fun MaterialDayPicker.Weekday.mapToABP(): DayOfWeek {
     when (this) {
@@ -36,51 +34,6 @@ fun MaterialDayPicker.Weekday.mapToABP(): DayOfWeek {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
-fun Month.mapMonth(): org.threeten.bp.Month {
-    when (this) {
-        Month.JANUARY -> {
-            return org.threeten.bp.Month.JANUARY
-        }
-        Month.FEBRUARY -> {
-            return org.threeten.bp.Month.FEBRUARY
-        }
-        Month.MARCH -> {
-            return org.threeten.bp.Month.MARCH
-        }
-        Month.APRIL -> {
-            return org.threeten.bp.Month.APRIL
-        }
-        Month.MAY -> {
-            return org.threeten.bp.Month.MAY
-        }
-        Month.JUNE -> {
-            return org.threeten.bp.Month.JUNE
-        }
-        Month.JULY -> {
-            return org.threeten.bp.Month.JULY
-        }
-        Month.AUGUST -> {
-            return org.threeten.bp.Month.AUGUST
-        }
-        Month.SEPTEMBER -> {
-            return org.threeten.bp.Month.SEPTEMBER
-        }
-        Month.OCTOBER -> {
-            return org.threeten.bp.Month.OCTOBER
-        }
-        Month.NOVEMBER -> {
-            return org.threeten.bp.Month.NOVEMBER
-        }
-        Month.DECEMBER -> {
-            return org.threeten.bp.Month.DECEMBER
-        }
-        else -> {
-            throw Exception("Not supported")
-        }
-    }
-}
-
 
 fun mapToABPMonth(month: Int): org.threeten.bp.Month {
     return when (month) {
@@ -98,4 +51,14 @@ fun mapToABPMonth(month: Int): org.threeten.bp.Month {
         11 -> org.threeten.bp.Month.DECEMBER
         else -> throw Exception("Hello")
     }
+}
+
+object FormatUtils {
+    val titleSameYearFormatter: DateTimeFormatter =
+        DateTimeFormatter.ofPattern("MMMM").withLocale(Config.default_locale)
+    val titleFormatter: DateTimeFormatter =
+        DateTimeFormatter.ofPattern("MMM yyyy").withLocale(Config.default_locale)
+    val selectionFormatter: DateTimeFormatter =
+        DateTimeFormatter.ofPattern("d MMM yyyy").withLocale(Config.default_locale)
+    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 }

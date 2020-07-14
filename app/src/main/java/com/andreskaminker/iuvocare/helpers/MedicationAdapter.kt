@@ -41,7 +41,6 @@ class MedicationAdapter(
     }
 
     override fun onBindViewHolder(holder: MedicationHolder, position: Int) {
-
         holder.apply {
             textViewTime.text =
                 "${medicationList[position].takeTime.hour}:${medicationList[position].takeTime.minutes}"

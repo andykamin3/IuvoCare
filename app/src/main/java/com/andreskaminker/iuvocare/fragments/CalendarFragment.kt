@@ -19,6 +19,7 @@ import com.andreskaminker.iuvocare.dtypes.*
 import com.andreskaminker.iuvocare.dtypes.Config.daysOfWeekFromLocale
 import com.andreskaminker.iuvocare.helpers.CalendarAdapter
 import com.andreskaminker.iuvocare.helpers.DummyData
+import com.andreskaminker.iuvocare.modules.FormatUtils
 import com.andreskaminker.iuvocare.modules.mapToABP
 import com.andreskaminker.iuvocare.modules.mapToABPMonth
 import com.kizitonwose.calendarview.model.CalendarDay
@@ -30,7 +31,6 @@ import com.kizitonwose.calendarview.ui.ViewContainer
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
-import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.WeekFields
 
 class CalendarFragment : Fragment() {
@@ -38,13 +38,7 @@ class CalendarFragment : Fragment() {
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
 
-
-    private val titleSameYearFormatter =
-        DateTimeFormatter.ofPattern("MMMM").withLocale(Config.default_locale)
-    private val titleFormatter =
-        DateTimeFormatter.ofPattern("MMM yyyy").withLocale(Config.default_locale)
-    private val selectionFormatter =
-        DateTimeFormatter.ofPattern("d MMM yyyy").withLocale(Config.default_locale)
+    companion object;
 
 
     private lateinit var v: View
@@ -75,7 +69,7 @@ class CalendarFragment : Fragment() {
         val lastMonth = currentMonth.plusMonths(10)
         val firstDayOfWeek = WeekFields.of(Config.default_locale).firstDayOfWeek
         val daysOfWeek = daysOfWeekFromLocale()
-        binding.dateTextView.text = selectionFormatter.format(today)
+        binding.dateTextView.text = FormatUtils.selectionFormatter.format(today)
         binding.recyclerView.apply {
             adapter = CalendarAdapter(mutableListOf())
             layoutManager = LinearLayoutManager(requireContext())
@@ -152,9 +146,9 @@ class CalendarFragment : Fragment() {
         }
         binding.calendarView.monthScrollListener = {
             binding.monthTitleTextView.text = if (it.year == today.year) {
-                titleSameYearFormatter.format(it.yearMonth)
+                FormatUtils.titleSameYearFormatter.format(it.yearMonth)
             } else {
-                titleFormatter.format(it.yearMonth)
+                FormatUtils.titleFormatter.format(it.yearMonth)
             }
             // Select the first day of the month when
             // we scroll to a new month.
@@ -167,7 +161,7 @@ class CalendarFragment : Fragment() {
     fun onDateSelected(newDate: LocalDate) {
         selectedDate = newDate
         binding.calendarView.notifyCalendarChanged()
-        binding.dateTextView.text = selectionFormatter.format(selectedDate)
+        binding.dateTextView.text = FormatUtils.selectionFormatter.format(selectedDate)
         val newData = mutableListOf<PatientActions>()
         val mAdapter = (binding.recyclerView.adapter as CalendarAdapter)
         for (element in DummyData.scheduledAppointments) {
@@ -176,7 +170,7 @@ class CalendarFragment : Fragment() {
                 mapToABPMonth(element.scheduledFor.mMonth),
                 element.scheduledFor.mDay
             )
-            Log.d(TAG, selectionFormatter.format(date))
+            Log.d(TAG, FormatUtils.selectionFormatter.format(date))
             if (date.equals(selectedDate)) {
                 newData.add(element)
             }
