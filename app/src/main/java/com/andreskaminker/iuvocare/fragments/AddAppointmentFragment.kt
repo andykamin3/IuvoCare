@@ -2,6 +2,7 @@ package com.andreskaminker.iuvocare.fragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.TimePicker
 import androidx.fragment.app.Fragment
+import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.dtypes.Appointment
 import com.andreskaminker.iuvocare.dtypes.DateResult
@@ -56,6 +58,17 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         return v
     }
 
+    private fun updateUI() {
+        val mActivity = requireActivity() as MainActivity
+        mActivity.setFabDrawable(R.drawable.ic_baseline_check_24_b)
+        mActivity.setFabColor(R.color.colorGreen)
+        mActivity.setFabClickListener {
+            (requireActivity() as MainActivity).setFabClickListener {
+                addAppointment(patient)
+            }
+        }
+    }
+
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         Log.d(TAG, "Hour is $hourOfDay and minutes are $minute")
         dateResult.apply {
@@ -76,6 +89,7 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     }
 
     override fun onStart() {
+        //updateUI()
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
         var helper: Helper?
@@ -99,9 +113,11 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
                         db.collection("patients").document(helper!!.helped).get()
                             .addOnSuccessListener { documentSnapshot ->
                                 patient = documentSnapshot.toObject(Patient::class.java)!!
-                                submitButton.setOnClickListener {
+                                /*submitButton.setOnClickListener {
                                     addAppointment(patient)
                                 }
+                                 */
+
                             }
                             .addOnFailureListener { exc ->
                                 Log.e(TAG, exc.toString())
@@ -122,6 +138,12 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
 
         super.onStart()
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        updateUI()
+    }
+
 
     private fun addAppointment(patient: Patient) {
         val appointmentName = editTextMedicationName.text.toString()

@@ -1,5 +1,6 @@
 package com.andreskaminker.iuvocare.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.StartActivity
 import com.google.android.material.snackbar.Snackbar
@@ -28,7 +31,18 @@ class ProfileFragment : Fragment() {
         return v
     }
 
+    private fun updateUI() {
+        val mActivity = requireActivity() as MainActivity
+        mActivity.setFabDrawable(R.drawable.ic_baseline_home_24_b)
+        mActivity.setFabColor(R.color.colorAccent)
+        mActivity.setFabClickListener {
+            val directions = ProfileFragmentDirections.actionProfileFragmentToHomeTabbedScreen()
+            v.findNavController().navigate(directions)
+        }
+    }
+
     override fun onStart() {
+        //updateUI()
         auth = FirebaseAuth.getInstance()
         buttonLogOut.setOnClickListener {
             auth.signOut()
@@ -38,5 +52,10 @@ class ProfileFragment : Fragment() {
         }
 
         super.onStart()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        updateUI()
     }
 }

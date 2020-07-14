@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_calendarFragment_to_addAppointmentFragment"
             app:destination="@id/addAppointmentFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_homeTabbedScreen"
+            app:destination="@id/homeTabbedScreen" />
     </fragment>
     <fragment
         android:id="@+id/userConfigFragment"

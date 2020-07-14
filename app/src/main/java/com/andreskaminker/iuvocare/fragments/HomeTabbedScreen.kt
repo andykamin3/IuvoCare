@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
 import com.google.android.material.tabs.TabLayout
 
@@ -29,6 +28,7 @@ class HomeTabbedScreen : Fragment() {
         return v
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewPager = v.findViewById(R.id.home_pager)
@@ -40,12 +40,6 @@ class HomeTabbedScreen : Fragment() {
     inner class ScreenPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {
-            if (position == 0) {
-                (requireActivity() as MainActivity).setFabDrawable(R.drawable.ic_pill_add_w)
-            } else {
-                (requireActivity() as MainActivity).setFabDrawable(R.drawable.ic_pill_add_w)
-            }
-
             return if (position == 0) {
                 SeeMedicationFragment.newInstance()
             } else {

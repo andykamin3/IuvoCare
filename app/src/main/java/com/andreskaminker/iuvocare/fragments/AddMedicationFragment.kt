@@ -1,6 +1,7 @@
 package com.andreskaminker.iuvocare.fragments
 
 import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.EditText
 import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import ca.antonious.materialdaypicker.MaterialDayPicker
+import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.dtypes.MedicationRequest
 import com.andreskaminker.iuvocare.dtypes.Patient
@@ -48,6 +50,15 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         return v
     }
 
+    private fun updateUI() {
+        val mActivity = requireActivity() as MainActivity
+        mActivity.setFabDrawable(R.drawable.ic_baseline_check_24_b)
+        mActivity.setFabColor(R.color.colorGreen)
+        mActivity.setFabClickListener {
+            addMedication()
+        }
+    }
+
     override fun onStart() {
         super.onStart()
 
@@ -62,9 +73,12 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
             imageSet = true
         }
 
-        submitButton.setOnClickListener {
-            addMedication()
-        }
+
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        updateUI()
     }
 
     private fun addMedication() {

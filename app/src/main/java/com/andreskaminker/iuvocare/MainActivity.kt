@@ -4,6 +4,8 @@ package com.andreskaminker.iuvocare
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity(),
             }
         }
 
+
     }
 
     override fun onBackPressed() {
@@ -61,12 +64,18 @@ class MainActivity : AppCompatActivity(),
         return true
     }
 
-    override fun setFabDrawable(drawable: Int) {
+    override fun setFabDrawable(@DrawableRes drawable: Int) {
         fabButton.setImageDrawable(resources.getDrawable(drawable, this.theme))
     }
 
-    override fun setFabColor(color: Int) {
-        TODO("Not yet implemented")
+    override fun setFabColor(@ColorRes color: Int) {
+        fabButton.background.setTint(resources.getColor(color, this.theme))
+    }
+
+    override fun setFabClickListener(clickListener: () -> Unit) {
+        fabButton.setOnClickListener {
+            clickListener()
+        }
     }
 }
 

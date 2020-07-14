@@ -1,5 +1,6 @@
 package com.andreskaminker.iuvocare.fragments
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +11,9 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.databinding.DayCalendarLayoutBinding
 import com.andreskaminker.iuvocare.databinding.FragmentCalendarBinding
@@ -157,6 +160,10 @@ class CalendarFragment : Fragment() {
         updateUI()
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        updateUI()
+    }
 
     fun onDateSelected(newDate: LocalDate) {
         selectedDate = newDate
@@ -194,7 +201,13 @@ class CalendarFragment : Fragment() {
 
 
     private fun updateUI() {
-
+        val mActivity = requireActivity() as MainActivity
+        mActivity.setFabDrawable(R.drawable.ic_baseline_home_24_b)
+        mActivity.setFabColor(R.color.colorAccent)
+        mActivity.setFabClickListener {
+            val directions = CalendarFragmentDirections.actionCalendarFragmentToHomeTabbedScreen()
+            v.findNavController().navigate(directions)
+        }
     }
 }
 

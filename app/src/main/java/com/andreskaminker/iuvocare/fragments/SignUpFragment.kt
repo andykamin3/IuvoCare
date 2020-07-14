@@ -38,6 +38,7 @@ class SignUpFragment : Fragment() {
         return v
     }
 
+
     override fun onStart() {
         auth = FirebaseAuth.getInstance()
         super.onStart()
