@@ -17,7 +17,6 @@ class HomeTabbedScreen : Fragment() {
     private lateinit var homeScreenAdapter: ScreenPageAdapter
     private lateinit var viewPager: ViewPager
     private lateinit var tabLayout: TabLayout
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

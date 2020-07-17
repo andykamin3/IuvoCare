@@ -56,6 +56,7 @@ class SeeAppointmentFragment : Fragment() {
     private fun updateUI() {
         val mActivity = requireActivity() as MainActivity
         mActivity.setFabDrawable(R.drawable.ic_baseline_add_24_b)
+        //mActivity.setFabColor(R.color.colorAccent)
         mActivity.setFabClickListener {
             val directions =
                 HomeTabbedScreenDirections.actionHomeTabbedScreenToAddAppointmentFragment()

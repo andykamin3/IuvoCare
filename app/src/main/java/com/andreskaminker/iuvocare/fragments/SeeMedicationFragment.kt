@@ -44,7 +44,6 @@ class SeeMedicationFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        updateUI()
         medicationList = DummyData.medicationRequests
         medicationAdapter = MedicationAdapter(medicationList, this)
         recyclerView.apply {
@@ -56,13 +55,10 @@ class SeeMedicationFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+
         updateUI()
     }
 
-    override fun onResume() {
-        super.onResume()
-        updateUI()
-    }
 
     private fun updateUI() {
         val mActivity = requireActivity() as MainActivity
