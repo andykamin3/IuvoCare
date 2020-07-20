@@ -30,19 +30,18 @@ class AppointmentAdapter(val appointmentList: MutableList<Appointment>) :
         holder.binding.appointmentTitleCard.text = appointmentList[position].title
         holder.binding.appointmentDateCard.text = formatStringDate(position)
         holder.binding.appointmentTimeCard.text = formatTime(position)
-
     }
 
     private fun formatStringDate(position: Int): String {
         appointmentList[position].scheduledFor.run {
-            val localDate = LocalDate.of(mYear, mapToABPMonth(mMonth), mDay)
+            val localDate = LocalDate.of(mYear!!, mapToABPMonth(mMonth!!), mDay!!)
             return localDate.format(FormatUtils.selectionFormatter)
         }
     }
 
     private fun formatTime(position: Int): String {
         appointmentList[position].scheduledFor.run {
-            val localTime = LocalTime.of(mHour, mMinutes)
+            val localTime = LocalTime.of(mHour!!, mMinutes!!)
             return localTime.format(FormatUtils.timeFormatter)
         }
     }

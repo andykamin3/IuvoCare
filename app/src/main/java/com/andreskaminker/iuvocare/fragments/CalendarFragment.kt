@@ -173,9 +173,9 @@ class CalendarFragment : Fragment() {
         val mAdapter = (binding.recyclerView.adapter as CalendarAdapter)
         for (element in DummyData.scheduledAppointments) {
             val date = LocalDate.of(
-                element.scheduledFor.mYear,
-                mapToABPMonth(element.scheduledFor.mMonth),
-                element.scheduledFor.mDay
+                element.scheduledFor.mYear!!,
+                mapToABPMonth(element.scheduledFor.mMonth!!),
+                element.scheduledFor.mDay!!
             )
             Log.d(TAG, FormatUtils.selectionFormatter.format(date))
             if (date.equals(selectedDate)) {
