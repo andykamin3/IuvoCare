@@ -3,6 +3,7 @@ package com.andreskaminker.iuvocare.helpers
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -12,6 +13,7 @@ import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.entities.Config
 import com.andreskaminker.iuvocare.entities.MedicationRequest
 import com.andreskaminker.iuvocare.modules.mapToABP
+import com.andreskaminker.iuvocare.ui.SeeMedicationFragment
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import org.threeten.bp.format.TextStyle
@@ -28,7 +30,9 @@ class MedicationAdapter(
         val imageView: ImageView = cv.findViewById(R.id.imageViewMedication)
         val textViewTime: TextView = cv.findViewById(R.id.textViewMedicationTime)
         val cardView = cv.findViewById<CardView>(R.id.cardViewMedication)
+        val deleteButton: Button = cv.findViewById(R.id.deleteMedicationButton)
         //TAB
+
     }
 
     fun setData(newData: List<MedicationRequest>) {
@@ -55,6 +59,9 @@ class MedicationAdapter(
             medicationList[position].scheduledFor.map {
                 weekString += (it.mapToABP()
                     .getDisplayName(TextStyle.FULL, Config.default_locale) + " ")
+            }
+            deleteButton.setOnClickListener {
+                (parent as SeeMedicationFragment).deleteMedication(medicationList[position])
             }
             textViewWeekdays.text = weekString
             val imgRef =

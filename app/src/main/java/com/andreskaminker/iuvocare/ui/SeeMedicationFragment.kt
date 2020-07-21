@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.fragments
+package com.andreskaminker.iuvocare.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -16,10 +16,12 @@ import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.entities.MedicationRequest
 import com.andreskaminker.iuvocare.helpers.DummyData
 import com.andreskaminker.iuvocare.helpers.MedicationAdapter
+import com.andreskaminker.iuvocare.modules.MedicationFragmentFunctions
 import com.andreskaminker.iuvocare.room.viewmodel.MedicationViewModel
+import com.andreskaminker.iuvocare.ui.dialogs.ConfirmDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class SeeMedicationFragment : Fragment() {
+class SeeMedicationFragment : Fragment(), MedicationFragmentFunctions {
     private lateinit var v: View
     private lateinit var medicationAdapter: MedicationAdapter
     private lateinit var medicationList: MutableList<MedicationRequest>
@@ -81,6 +83,17 @@ class SeeMedicationFragment : Fragment() {
                 HomeTabbedScreenDirections.actionHomeTabbedScreenToAddMedicationFragment()
             v.findNavController().navigate(directions)
         }
+    }
+
+    override fun deleteMedication(medicationRequest: MedicationRequest) {
+        ConfirmDialog("Confirmar borrado de medicación") { onDeleteConfirmed(medicationRequest) }.show(
+            childFragmentManager,
+            "confirmDeleteFrg"
+        )
+    }
+
+    fun onDeleteConfirmed(medicationRequest: MedicationRequest) {
+        medicationViewModel.deleteMedication(medicationRequest)
     }
 
 }

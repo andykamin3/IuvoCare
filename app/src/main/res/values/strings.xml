@@ -53,4 +53,8 @@
     <string name="perfil">Perfil</string>
     <string name="inicio">Inicio</string>
     <string name="calendario">Calendario</string>
+    <string name="yes">CONFIRMAR</string>
+    <string name="no">CANCELAR</string>
+    <string name="action_canceled">Acción cancelada</string>
+    <string name="delete_button">Borrar</string>
 </resources>

@@ -1,9 +1,8 @@
-package com.andreskaminker.iuvocare.fragments
+package com.andreskaminker.iuvocare.ui
 
 import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +10,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TimePicker
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import ca.antonious.materialdaypicker.MaterialDayPicker
 import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.entities.MedicationRequest
 import com.andreskaminker.iuvocare.entities.Patient
 import com.andreskaminker.iuvocare.entities.TimeResult
-import com.andreskaminker.iuvocare.fragments.nscren.TimePickerFragment
+import com.andreskaminker.iuvocare.room.viewmodel.MedicationViewModel
+import com.andreskaminker.iuvocare.ui.dialogs.TimePickerFragment
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -33,6 +35,7 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     private lateinit var descriptionEditText: EditText
     private lateinit var submitButton: Button
     private lateinit var imageButton: Button
+    private val medicationViewModel: MedicationViewModel by activityViewModels()
     private val currentPatient = Patient("123", "Andy", "andykamin3@gmail.com", "")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,10 +95,13 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                 patient = currentPatient,
                 medicationName = medicationName,
                 scheduledFor = weekDays,
-                imageUrl = "https://firstaidforlife.org.uk/wp-content/uploads/2018/03/poisoning-pill-bottle.jpg",
+                imageUrl = "images.jpg", //TODO: Change image when uploaded
                 takeTime = timeResult
             )
-            Log.d(TAG, medicationRequest.toString())
+            medicationViewModel.addMedication(medicationRequest)
+            val directions =
+                AddMedicationFragmentDirections.actionAddMedicationFragmentToHomeTabbedScreen()
+            v.findNavController().navigate(directions)
         } else {
             Snackbar
                 .make(v, "Por favor completar los campos obligatorios", Snackbar.LENGTH_SHORT)

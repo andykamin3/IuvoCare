@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.fragments
+package com.andreskaminker.iuvocare.ui
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -19,8 +19,8 @@ import com.andreskaminker.iuvocare.entities.Appointment
 import com.andreskaminker.iuvocare.entities.DateResult
 import com.andreskaminker.iuvocare.entities.Helper
 import com.andreskaminker.iuvocare.entities.Patient
-import com.andreskaminker.iuvocare.fragments.nscren.DatePickerFragment
-import com.andreskaminker.iuvocare.fragments.nscren.TimePickerFragment
+import com.andreskaminker.iuvocare.ui.dialogs.DatePickerFragment
+import com.andreskaminker.iuvocare.ui.dialogs.TimePickerFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.fragments
+package com.andreskaminker.iuvocare.ui
 
 import android.content.Intent
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.fragments
+package com.andreskaminker.iuvocare.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -13,11 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.databinding.FragmentSeeAppointmentBinding
+import com.andreskaminker.iuvocare.entities.Appointment
 import com.andreskaminker.iuvocare.helpers.AppointmentAdapter
+import com.andreskaminker.iuvocare.modules.AppointmentFragmentFunctions
 import com.andreskaminker.iuvocare.room.viewmodel.AppointmentViewModel
+import com.andreskaminker.iuvocare.ui.dialogs.ConfirmDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class SeeAppointmentFragment : Fragment() {
+class SeeAppointmentFragment : Fragment(), AppointmentFragmentFunctions {
 
     var _binding: FragmentSeeAppointmentBinding? = null
     val binding get() = _binding!!
@@ -36,7 +39,7 @@ class SeeAppointmentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mAdapter = AppointmentAdapter()
+        val mAdapter = AppointmentAdapter(fragment = this)
         binding.recyclerAppointments.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(context)
@@ -71,5 +74,16 @@ class SeeAppointmentFragment : Fragment() {
                 HomeTabbedScreenDirections.actionHomeTabbedScreenToAddAppointmentFragment()
             binding.root.findNavController().navigate(directions)
         }
+    }
+
+    fun deleteConfirmed(appointment: Appointment) {
+        appointmentViewModel.deleteAppointment(appointment)
+    }
+
+    override fun deleteAppointment(appointment: Appointment) {
+        ConfirmDialog("Borrar el turno") { deleteConfirmed(appointment) }.show(
+            childFragmentManager,
+            "confirmDelete"
+        )
     }
 }

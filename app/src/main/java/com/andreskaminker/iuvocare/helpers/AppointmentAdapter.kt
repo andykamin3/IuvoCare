@@ -2,15 +2,17 @@ package com.andreskaminker.iuvocare.helpers
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.databinding.CardAppointmentBinding
 import com.andreskaminker.iuvocare.entities.Appointment
 import com.andreskaminker.iuvocare.modules.FormatUtils
 import com.andreskaminker.iuvocare.modules.mapToABPMonth
+import com.andreskaminker.iuvocare.ui.SeeAppointmentFragment
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 
-class AppointmentAdapter :
+class AppointmentAdapter(val fragment: Fragment) :
     RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
     var appointmentList: List<Appointment> = emptyList<Appointment>()
 
@@ -36,6 +38,10 @@ class AppointmentAdapter :
         holder.binding.appointmentTitleCard.text = appointmentList[position].title
         holder.binding.appointmentDateCard.text = formatStringDate(position)
         holder.binding.appointmentTimeCard.text = formatTime(position)
+        holder.binding.buttonDelete.setOnClickListener {
+            fragment as SeeAppointmentFragment
+            fragment.deleteAppointment(appointmentList[position])
+        }
     }
 
     private fun formatStringDate(position: Int): String {

@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.fragments.nscren
+package com.andreskaminker.iuvocare.ui.dialogs
 
 import android.app.DatePickerDialog
 import android.app.Dialog
