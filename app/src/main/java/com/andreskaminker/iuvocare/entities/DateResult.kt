@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.dtypes
+package com.andreskaminker.iuvocare.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

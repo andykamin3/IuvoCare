@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.andreskaminker.iuvocare.R
-import com.andreskaminker.iuvocare.dtypes.Helper
+import com.andreskaminker.iuvocare.entities.Helper
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest

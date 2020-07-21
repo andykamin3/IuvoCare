@@ -18,8 +18,8 @@ import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.databinding.DayCalendarLayoutBinding
 import com.andreskaminker.iuvocare.databinding.FragmentCalendarBinding
 import com.andreskaminker.iuvocare.databinding.MonthLegendCalendarLayoutBinding
-import com.andreskaminker.iuvocare.dtypes.*
-import com.andreskaminker.iuvocare.dtypes.Config.daysOfWeekFromLocale
+import com.andreskaminker.iuvocare.entities.*
+import com.andreskaminker.iuvocare.entities.Config.daysOfWeekFromLocale
 import com.andreskaminker.iuvocare.helpers.CalendarAdapter
 import com.andreskaminker.iuvocare.helpers.DummyData
 import com.andreskaminker.iuvocare.modules.FormatUtils

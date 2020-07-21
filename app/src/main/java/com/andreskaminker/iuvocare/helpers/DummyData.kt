@@ -3,7 +3,7 @@ package com.andreskaminker.iuvocare.helpers
 import android.os.Build
 import androidx.annotation.RequiresApi
 import ca.antonious.materialdaypicker.MaterialDayPicker
-import com.andreskaminker.iuvocare.dtypes.*
+import com.andreskaminker.iuvocare.entities.*
 import java.util.*
 import java.util.Calendar.DECEMBER
 
@@ -18,8 +18,8 @@ object DummyData {
         medicationRequests.add(
             MedicationRequest(
                 "111",
-                "Ritalin 15mg",
                 currentPatient,
+                "Ritalin 15mg",
                 mutableListOf(MaterialDayPicker.Weekday.MONDAY),
                 "images.jpg",
                 TimeResult(2, 30)
@@ -28,8 +28,8 @@ object DummyData {
         medicationRequests.add(
             MedicationRequest(
                 "111",
-                "Ritalin 15mg",
                 currentPatient,
+                "Ritalin 16mg",
                 mutableListOf(
                     MaterialDayPicker.Weekday.FRIDAY,
                     MaterialDayPicker.Weekday.WEDNESDAY
@@ -59,7 +59,7 @@ object DummyData {
                 id = "111",
                 patient = currentPatient,
                 scheduledFor = DateResult(),
-                title = "Cardiologo",
+                title = "Trujan",
                 description = "Doctor Jones en Gurruchaga 2121"
             )
         )

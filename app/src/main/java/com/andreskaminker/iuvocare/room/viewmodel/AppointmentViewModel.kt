@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.andreskaminker.iuvocare.dtypes.Appointment
+import com.andreskaminker.iuvocare.entities.Appointment
 import com.andreskaminker.iuvocare.room.IuvoRoomDatabase
 import com.andreskaminker.iuvocare.room.repositories.AppointmentRepository
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +15,8 @@ class AppointmentViewModel(application: Application) : AndroidViewModel(applicat
     val allAppointments: LiveData<List<Appointment>>
 
     init {
-        val appointmentDao = IuvoRoomDatabase.getDatabase(application).appointmentDao()
+        val appointmentDao =
+            IuvoRoomDatabase.getDatabase(application, viewModelScope).appointmentDao()
         repository = AppointmentRepository(appointmentDao)
         allAppointments = repository.allAppointments
     }

@@ -1,6 +1,6 @@
 package com.andreskaminker.iuvocare.room.repositories
 
-import com.andreskaminker.iuvocare.dtypes.Appointment
+import com.andreskaminker.iuvocare.entities.Appointment
 import com.andreskaminker.iuvocare.room.daos.AppointmentDao
 
 class AppointmentRepository(val appointmentDao: AppointmentDao) {

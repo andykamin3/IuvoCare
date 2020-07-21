@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.databinding.FragmentSeeAppointmentBinding
 import com.andreskaminker.iuvocare.helpers.AppointmentAdapter
-import com.andreskaminker.iuvocare.helpers.DummyData
+import com.andreskaminker.iuvocare.room.viewmodel.AppointmentViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SeeAppointmentFragment : Fragment() {
@@ -20,6 +22,8 @@ class SeeAppointmentFragment : Fragment() {
     var _binding: FragmentSeeAppointmentBinding? = null
     val binding get() = _binding!!
     private lateinit var fabButton: FloatingActionButton
+    private val appointmentViewModel: AppointmentViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,11 +36,16 @@ class SeeAppointmentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val mAdapter = AppointmentAdapter()
         binding.recyclerAppointments.apply {
-            adapter = AppointmentAdapter(DummyData.scheduledAppointments)
+            adapter = mAdapter
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
         }
+
+        appointmentViewModel.allAppointments.observe(viewLifecycleOwner, Observer { appointments ->
+            appointments?.let { mAdapter.setData(appointments) }
+        })
     }
 
     override fun onAttach(context: Context) {

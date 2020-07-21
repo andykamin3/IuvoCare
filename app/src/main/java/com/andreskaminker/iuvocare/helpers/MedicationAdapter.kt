@@ -9,18 +9,19 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.R
-import com.andreskaminker.iuvocare.dtypes.Config
-import com.andreskaminker.iuvocare.dtypes.MedicationRequest
+import com.andreskaminker.iuvocare.entities.Config
+import com.andreskaminker.iuvocare.entities.MedicationRequest
 import com.andreskaminker.iuvocare.modules.mapToABP
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import org.threeten.bp.format.TextStyle
 
 class MedicationAdapter(
-    private val medicationList: MutableList<MedicationRequest>,
     val parent: Fragment
 ) :
     RecyclerView.Adapter<MedicationAdapter.MedicationHolder>() {
+    private var medicationList: List<MedicationRequest> = emptyList()
+
     class MedicationHolder(cv: View) : RecyclerView.ViewHolder(cv) {
         val textViewMedicationName: TextView = cv.findViewById(R.id.textViewMedicationName)
         val textViewWeekdays: TextView = cv.findViewById(R.id.textViewMedicationDate)
@@ -28,6 +29,11 @@ class MedicationAdapter(
         val textViewTime: TextView = cv.findViewById(R.id.textViewMedicationTime)
         val cardView = cv.findViewById<CardView>(R.id.cardViewMedication)
         //TAB
+    }
+
+    fun setData(newData: List<MedicationRequest>) {
+        medicationList = newData
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicationHolder {

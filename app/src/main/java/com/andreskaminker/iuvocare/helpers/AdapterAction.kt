@@ -6,9 +6,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.R
-import com.andreskaminker.iuvocare.dtypes.ActionKind
-import com.andreskaminker.iuvocare.dtypes.Appointment
-import com.andreskaminker.iuvocare.dtypes.PatientActions
+import com.andreskaminker.iuvocare.entities.Appointment
+import com.andreskaminker.iuvocare.entities.PatientActions
 
 class AdapterAction(private val patientActions: ArrayList<PatientActions>) :
     RecyclerView.Adapter<AdapterAction.ActionViewHolder>() {
@@ -31,14 +30,13 @@ class AdapterAction(private val patientActions: ArrayList<PatientActions>) :
     }
 
     override fun onBindViewHolder(holder: ActionViewHolder, position: Int) {
-        if(patientActions[position].kind == ActionKind.APPOINTMENT) {
-            val element = patientActions[position] as Appointment
+        val element = patientActions[position] as Appointment
             holder.textViewMain.text = element.description
             holder.textViewTime.text =
                 "${element.scheduledFor.mDay}-${element.scheduledFor.mMonth}-${element.scheduledFor.mYear}  ${element.scheduledFor.mHour}:${element.scheduledFor.mMinutes} "
 
             holder.textViewStatus.text = element.status.toString()
-        }
+
 
     }
 }

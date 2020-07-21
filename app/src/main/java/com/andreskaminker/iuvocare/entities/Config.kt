@@ -1,4 +1,4 @@
-package com.andreskaminker.iuvocare.dtypes
+package com.andreskaminker.iuvocare.entities
 
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.temporal.WeekFields

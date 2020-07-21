@@ -14,9 +14,9 @@ import androidx.fragment.app.Fragment
 import ca.antonious.materialdaypicker.MaterialDayPicker
 import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
-import com.andreskaminker.iuvocare.dtypes.MedicationRequest
-import com.andreskaminker.iuvocare.dtypes.Patient
-import com.andreskaminker.iuvocare.dtypes.TimeResult
+import com.andreskaminker.iuvocare.entities.MedicationRequest
+import com.andreskaminker.iuvocare.entities.Patient
+import com.andreskaminker.iuvocare.entities.TimeResult
 import com.andreskaminker.iuvocare.fragments.nscren.TimePickerFragment
 import com.google.android.material.snackbar.Snackbar
 
@@ -90,9 +90,9 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
             val medicationRequest = MedicationRequest(
                 id = "generated",
                 patient = currentPatient,
-                medication = medicationName,
+                medicationName = medicationName,
                 scheduledFor = weekDays,
-                imageURL = "https://firstaidforlife.org.uk/wp-content/uploads/2018/03/poisoning-pill-bottle.jpg",
+                imageUrl = "https://firstaidforlife.org.uk/wp-content/uploads/2018/03/poisoning-pill-bottle.jpg",
                 takeTime = timeResult
             )
             Log.d(TAG, medicationRequest.toString())

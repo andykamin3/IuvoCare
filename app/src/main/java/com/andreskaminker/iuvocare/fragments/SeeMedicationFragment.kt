@@ -6,14 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
-import com.andreskaminker.iuvocare.dtypes.MedicationRequest
+import com.andreskaminker.iuvocare.entities.MedicationRequest
 import com.andreskaminker.iuvocare.helpers.DummyData
 import com.andreskaminker.iuvocare.helpers.MedicationAdapter
+import com.andreskaminker.iuvocare.room.viewmodel.MedicationViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SeeMedicationFragment : Fragment() {
@@ -22,6 +25,8 @@ class SeeMedicationFragment : Fragment() {
     private lateinit var medicationList: MutableList<MedicationRequest>
     private lateinit var recyclerView: RecyclerView
     private lateinit var fabButton: FloatingActionButton
+
+    private val medicationViewModel: MedicationViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,15 +47,22 @@ class SeeMedicationFragment : Fragment() {
             }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         medicationList = DummyData.medicationRequests
-        medicationAdapter = MedicationAdapter(medicationList, this)
+        medicationAdapter = MedicationAdapter(this)
         recyclerView.apply {
             setHasFixedSize(true)
             adapter = medicationAdapter
             layoutManager = LinearLayoutManager(context)
         }
+        medicationViewModel.allAppointments.observe(
+            viewLifecycleOwner,
+            Observer { medicationsList ->
+                medicationsList?.let {
+                    medicationAdapter.setData(medicationsList)
+                }
+            })
     }
 
     override fun onAttach(context: Context) {

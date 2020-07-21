@@ -2,7 +2,7 @@ package com.andreskaminker.iuvocare.room.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.andreskaminker.iuvocare.dtypes.Appointment
+import com.andreskaminker.iuvocare.entities.Appointment
 
 @Dao
 interface AppointmentDao {

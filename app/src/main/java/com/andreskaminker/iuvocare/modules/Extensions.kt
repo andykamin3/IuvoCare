@@ -1,7 +1,7 @@
 package com.andreskaminker.iuvocare.modules
 
 import ca.antonious.materialdaypicker.MaterialDayPicker
-import com.andreskaminker.iuvocare.dtypes.Config
+import com.andreskaminker.iuvocare.entities.Config
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.format.DateTimeFormatter
 

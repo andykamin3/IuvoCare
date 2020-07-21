@@ -15,10 +15,10 @@ import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
-import com.andreskaminker.iuvocare.dtypes.Appointment
-import com.andreskaminker.iuvocare.dtypes.DateResult
-import com.andreskaminker.iuvocare.dtypes.Helper
-import com.andreskaminker.iuvocare.dtypes.Patient
+import com.andreskaminker.iuvocare.entities.Appointment
+import com.andreskaminker.iuvocare.entities.DateResult
+import com.andreskaminker.iuvocare.entities.Helper
+import com.andreskaminker.iuvocare.entities.Patient
 import com.andreskaminker.iuvocare.fragments.nscren.DatePickerFragment
 import com.andreskaminker.iuvocare.fragments.nscren.TimePickerFragment
 import com.google.android.material.snackbar.Snackbar

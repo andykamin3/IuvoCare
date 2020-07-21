@@ -4,14 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.databinding.CardAppointmentBinding
-import com.andreskaminker.iuvocare.dtypes.Appointment
+import com.andreskaminker.iuvocare.entities.Appointment
 import com.andreskaminker.iuvocare.modules.FormatUtils
 import com.andreskaminker.iuvocare.modules.mapToABPMonth
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 
-class AppointmentAdapter(val appointmentList: MutableList<Appointment>) :
+class AppointmentAdapter :
     RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
+    var appointmentList: List<Appointment> = emptyList<Appointment>()
+
     class AppointmentHolder(val binding: CardAppointmentBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -24,6 +26,10 @@ class AppointmentAdapter(val appointmentList: MutableList<Appointment>) :
 
     override fun getItemCount(): Int = appointmentList.size
 
+    fun setData(newData: List<Appointment>) {
+        appointmentList = newData
+        notifyDataSetChanged()
+    }
 
     override fun onBindViewHolder(holder: AppointmentHolder, position: Int) {
         holder.binding.appointmentDescriptionCard.text = appointmentList[position].description
