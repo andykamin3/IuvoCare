@@ -60,6 +60,13 @@ class CalendarAdapter(var calendarEvents: MutableList<PatientActions>) :
 
 
     override fun onBindViewHolder(holder: CalendarElement, position: Int) {
+        if (calendarEvents[position] is Appointment) {
+            holder.renderAppointment(position)
+        } else if (calendarEvents[position] is MedicationRequest) {
+            holder.renderMedication(position)
+        } else {
+            throw IllegalStateException("There should not be other types of elements")
+        }
         /*
         when (calendarEvents[position].kind) {
             ActionKind.APPOINTMENT -> {

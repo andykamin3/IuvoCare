@@ -1,16 +1,16 @@
 package com.andreskaminker.iuvocare.fragments
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andreskaminker.iuvocare.MainActivity
@@ -25,6 +25,8 @@ import com.andreskaminker.iuvocare.helpers.DummyData
 import com.andreskaminker.iuvocare.modules.FormatUtils
 import com.andreskaminker.iuvocare.modules.mapToABP
 import com.andreskaminker.iuvocare.modules.mapToABPMonth
+import com.andreskaminker.iuvocare.room.viewmodel.AppointmentViewModel
+import com.andreskaminker.iuvocare.room.viewmodel.MedicationViewModel
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
@@ -50,6 +52,9 @@ class CalendarFragment : Fragment() {
     private val currentPatient = Patient("123", "Andy", "andykamin3@gmail.com", "")
     private val today = LocalDate.now()
     private var selectedDate: LocalDate? = today
+
+    private val appointmentViewModel: AppointmentViewModel by activityViewModels()
+    private val medicationViewModel: MedicationViewModel by activityViewModels()
 
     class DayViewContainer(val viewRoot: View) : ViewContainer(viewRoot) {
         lateinit var day: CalendarDay
@@ -96,7 +101,12 @@ class CalendarFragment : Fragment() {
                         container.linearLayout.children.map { it as TextView }
                             .forEachIndexed { index, tv ->
                                 tv.text = daysOfWeek[index].name.first().toString()
-                                tv.setTextColor(resources.getColor(R.color.colorBlack))
+                                tv.setTextColor(
+                                    resources.getColor(
+                                        R.color.colorBlack,
+                                        context?.theme
+                                    )
+                                )
                             }
                     }
                 }
@@ -108,7 +118,7 @@ class CalendarFragment : Fragment() {
         binding.calendarView.dayBinder = object : DayBinder<DayViewContainer> {
             override fun create(view: View): DayViewContainer = DayViewContainer(view)
 
-            @RequiresApi(Build.VERSION_CODES.O)
+
             override fun bind(container: DayViewContainer, day: CalendarDay) {
                 container.day = day
                 container.binding.dayEditText.text = day.day.toString()
@@ -119,12 +129,12 @@ class CalendarFragment : Fragment() {
                     when (container.day.date) {
                         selectedDate -> {
                             container.binding.dayEditText.background =
-                                resources.getDrawable(R.drawable.example_3_today_bg)
+                                resources.getDrawable(R.drawable.example_3_today_bg, context?.theme)
                             container.binding.eventThatDay.visibility = View.GONE
                         }
                         else -> {
                             container.binding.dayEditText.background =
-                                resources.getDrawable(R.drawable.bg_calendar_white)
+                                resources.getDrawable(R.drawable.bg_calendar_white, context?.theme)
 
                         }
                     }
@@ -171,25 +181,30 @@ class CalendarFragment : Fragment() {
         binding.dateTextView.text = FormatUtils.selectionFormatter.format(selectedDate)
         val newData = mutableListOf<PatientActions>()
         val mAdapter = (binding.recyclerView.adapter as CalendarAdapter)
-        for (element in DummyData.scheduledAppointments) {
-            val date = LocalDate.of(
-                element.scheduledFor.mYear!!,
-                mapToABPMonth(element.scheduledFor.mMonth!!),
-                element.scheduledFor.mDay!!
-            )
-            Log.d(TAG, FormatUtils.selectionFormatter.format(date))
-            if (date.equals(selectedDate)) {
-                newData.add(element)
+        appointmentViewModel.allAppointments.observe(viewLifecycleOwner, Observer { appointments ->
+            for (element in appointments) {
+                val date = LocalDate.of(
+                    element.scheduledFor.mYear!!,
+                    mapToABPMonth(element.scheduledFor.mMonth!!),
+                    element.scheduledFor.mDay!!
+                )
+                Log.d(TAG, FormatUtils.selectionFormatter.format(date))
+                if (date.equals(selectedDate)) {
+                    newData.add(element)
+                }
             }
-        }
-        for (element in DummyData.medicationRequests) {
-            val weekDays = element.scheduledFor.map {
-                it.mapToABP()
+        })
+        medicationViewModel.allAppointments.observe(viewLifecycleOwner, Observer {
+            for (element in DummyData.medicationRequests) {
+                val weekDays = element.scheduledFor.map {
+                    it.mapToABP()
+                }
+                if (weekDays.contains(selectedDate!!.dayOfWeek)) {
+                    newData.add(element)
+                }
             }
-            if (weekDays.contains(selectedDate!!.dayOfWeek)) {
-                newData.add(element)
-            }
-        }
+        })
+
         mAdapter.setData(newData)
     }
 
