@@ -33,7 +33,6 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     private var imageSet = false
     private lateinit var nameEditText: EditText
     private lateinit var descriptionEditText: EditText
-    private lateinit var submitButton: Button
     private lateinit var imageButton: Button
     private val medicationViewModel: MedicationViewModel by activityViewModels()
     private val currentPatient = Patient("123", "Andy", "andykamin3@gmail.com", "")
@@ -47,9 +46,7 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         timeButton = v.findViewById(R.id.timeButton)
         nameEditText = v.findViewById(R.id.editTextMedicationName)
         descriptionEditText = v.findViewById(R.id.editTextMedicationDescription)
-        submitButton = v.findViewById(R.id.submitButton)
         imageButton = v.findViewById(R.id.imageButton)
-
         return v
     }
 
@@ -64,9 +61,6 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     override fun onStart() {
         super.onStart()
-
-
-
         timeButton.setOnClickListener {
             TimePickerFragment()
                 .show(childFragmentManager, "timePicker")
@@ -75,8 +69,6 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         imageButton.setOnClickListener {
             imageSet = true
         }
-
-
     }
 
     override fun onAttach(context: Context) {
@@ -99,6 +91,7 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                 takeTime = timeResult
             )
             medicationViewModel.addMedication(medicationRequest)
+            (requireActivity() as MainActivity).setFabColor(R.color.colorAccent)
             val directions =
                 AddMedicationFragmentDirections.actionAddMedicationFragmentToHomeTabbedScreen()
             v.findNavController().navigate(directions)

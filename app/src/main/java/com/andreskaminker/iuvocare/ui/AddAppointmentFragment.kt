@@ -13,12 +13,15 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.TimePicker
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.entities.Appointment
 import com.andreskaminker.iuvocare.entities.DateResult
-import com.andreskaminker.iuvocare.entities.Helper
 import com.andreskaminker.iuvocare.entities.Patient
+import com.andreskaminker.iuvocare.helpers.DummyData
+import com.andreskaminker.iuvocare.room.viewmodel.AppointmentViewModel
 import com.andreskaminker.iuvocare.ui.dialogs.DatePickerFragment
 import com.andreskaminker.iuvocare.ui.dialogs.TimePickerFragment
 import com.google.android.material.snackbar.Snackbar
@@ -34,7 +37,6 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     private lateinit var timeButton: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
-    private lateinit var submitButton: Button
     private lateinit var nameEditText: EditText
     private lateinit var descriptionEditText: EditText
 
@@ -43,7 +45,7 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     private lateinit var patient: Patient
     private var timeSetted = false
     private var dateSetted = false
-
+    private val appointmentViewModel: AppointmentViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,7 +53,6 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         v = inflater.inflate(R.layout.fragment_add_appointment, container, false)
         timeButton = v.findViewById(R.id.timeButton)
         dateButton = v.findViewById(R.id.dateButton)
-        submitButton = v.findViewById(R.id.confirmButton)
         nameEditText = v.findViewById(R.id.editTextMedicationName)
         descriptionEditText = v.findViewById(R.id.editTextMedicationDescription)
 
@@ -64,7 +65,7 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         mActivity.setFabColor(R.color.colorGreen)
         mActivity.setFabClickListener {
             (requireActivity() as MainActivity).setFabClickListener {
-                addAppointment(patient)
+                addAppointment(DummyData.currentPatient)
             }
         }
     }
@@ -89,43 +90,6 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     }
 
     override fun onStart() {
-        //updateUI()
-        auth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
-        var helper: Helper?
-        val user = auth.currentUser
-        if (user == null) {
-            goToAuth()
-        } else {
-            db.collection("helpers").document(user.uid).get()
-                .addOnSuccessListener { documentSnapshot ->
-                    helper = documentSnapshot.toObject(Helper::class.java)
-                    Log.d(TAG, helper.toString())
-                    //TODO: Add listener for button click to add data.
-                    if (helper!!.helped == "") {
-                        Snackbar.make(
-                            v,
-                            "Tenés que tener un usuario asociado",
-                            Snackbar.LENGTH_SHORT
-                        )
-                    } else {
-                        Log.d(TAG, "Fetching patient info")
-                        db.collection("patients").document(helper!!.helped).get()
-                            .addOnSuccessListener { documentSnapshot ->
-                                patient = documentSnapshot.toObject(Patient::class.java)!!
-                                /*submitButton.setOnClickListener {
-                                    addAppointment(patient)
-                                }
-                                 */
-
-                            }
-                            .addOnFailureListener { exc ->
-                                Log.e(TAG, exc.toString())
-                            }
-                    }
-                }
-        }
-
         dateButton.setOnClickListener {
             DatePickerFragment()
                 .show(childFragmentManager, "timePicker")
@@ -148,7 +112,7 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     private fun addAppointment(patient: Patient) {
         val appointmentName = editTextMedicationName.text.toString()
         val appointmentDescription = editTextMedicationDescription.text.toString()
-        if (appointmentName == "" && timeSetted && dateSetted) {
+        if (appointmentName != "" && timeSetted && dateSetted) {
             val mAppointment = Appointment(
                 "generated",
                 appointmentDescription,
@@ -156,12 +120,14 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
                 patient,
                 dateResult
             )
-            Log.d(TAG, "Generated $mAppointment")
+            appointmentViewModel.addAppointment(mAppointment)
+            (requireActivity() as MainActivity).setFabColor(R.color.colorAccent)
+            val directions =
+                AddAppointmentFragmentDirections.actionAddAppointmentFragmentToHomeTabbedScreen()
+            v.findNavController().navigate(directions)
         } else {
             Snackbar.make(v, "Completa todos los campos", Snackbar.LENGTH_SHORT).show()
         }
-        Log.d(TAG, "$timeSetted & $ $dateSetted")
-
     }
 
     private fun goToAuth() {
