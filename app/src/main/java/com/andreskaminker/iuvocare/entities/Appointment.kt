@@ -54,12 +54,9 @@ class Appointment() : PatientActions("") {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-
         other as Appointment
-
         if (aptId != other.aptId) return false
         if (title != other.title) return false
-
         return true
     }
 

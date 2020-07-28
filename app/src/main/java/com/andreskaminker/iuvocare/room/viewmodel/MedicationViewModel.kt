@@ -12,13 +12,13 @@ import kotlinx.coroutines.launch
 
 class MedicationViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: MedicationRepository
-    val allAppointments: LiveData<List<MedicationRequest>>
+    val allMedications: LiveData<List<MedicationRequest>>
 
     init {
         val medicationDao =
             IuvoRoomDatabase.getDatabase(application, viewModelScope).medicationDao()
         repository = MedicationRepository(medicationDao)
-        allAppointments = repository.allMedication
+        allMedications = repository.allMedication
     }
 
     fun addMedication(medicationRequest: MedicationRequest) =

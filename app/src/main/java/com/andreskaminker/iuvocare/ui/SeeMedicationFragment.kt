@@ -58,7 +58,7 @@ class SeeMedicationFragment : Fragment(), MedicationFragmentFunctions {
             adapter = medicationAdapter
             layoutManager = LinearLayoutManager(context)
         }
-        medicationViewModel.allAppointments.observe(
+        medicationViewModel.allMedications.observe(
             viewLifecycleOwner,
             Observer { medicationsList ->
                 medicationsList?.let {

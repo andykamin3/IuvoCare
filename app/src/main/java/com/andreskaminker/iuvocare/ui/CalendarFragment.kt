@@ -21,7 +21,6 @@ import com.andreskaminker.iuvocare.databinding.MonthLegendCalendarLayoutBinding
 import com.andreskaminker.iuvocare.entities.*
 import com.andreskaminker.iuvocare.entities.Config.daysOfWeekFromLocale
 import com.andreskaminker.iuvocare.helpers.CalendarAdapter
-import com.andreskaminker.iuvocare.helpers.DummyData
 import com.andreskaminker.iuvocare.modules.FormatUtils
 import com.andreskaminker.iuvocare.modules.mapToABP
 import com.andreskaminker.iuvocare.modules.mapToABPMonth
@@ -77,12 +76,30 @@ class CalendarFragment : Fragment() {
         val lastMonth = currentMonth.plusMonths(10)
         val firstDayOfWeek = WeekFields.of(Config.default_locale).firstDayOfWeek
         val daysOfWeek = daysOfWeekFromLocale()
+        val listWeekDays = mutableListOf<DayOfWeek>()
+
+        val listOfDates = mutableListOf<LocalDate>()
+        appointmentViewModel.allAppointments.observe(viewLifecycleOwner, Observer { appointments ->
+            for (appointment in appointments) {
+                appointment.scheduledFor.retrieveLocalDate()?.let { listOfDates.add(it) }
+            }
+        })
+
         binding.dateTextView.text = FormatUtils.selectionFormatter.format(today)
         binding.recyclerView.apply {
             adapter = CalendarAdapter(mutableListOf())
             layoutManager = LinearLayoutManager(requireContext())
         }
 
+        medicationViewModel.allMedications.value?.map { medicationRequest ->
+            listWeekDays.addAll(medicationRequest.scheduledFor.map { weekday -> weekday.mapToABP() })
+        }
+
+        appointmentViewModel.allAppointments.value?.map {
+            it.scheduledFor.retrieveLocalDate()?.let { localDate -> listOfDates.add(localDate) }
+        }
+        Log.d(TAG, listOfDates.toString())
+        Log.d(TAG, listWeekDays.toString())
         binding.calendarView.apply {
             setup(firstMonth, lastMonth, firstDayOfWeek)
             scrollToMonth(currentMonth)
@@ -122,9 +139,6 @@ class CalendarFragment : Fragment() {
             override fun bind(container: DayViewContainer, day: CalendarDay) {
                 container.day = day
                 container.binding.dayEditText.text = day.day.toString()
-                container.binding.root.setOnClickListener {
-                    Log.d(TAG, container.day.date.dayOfWeek.toString())
-                }
                 if (container.day.owner == DayOwner.THIS_MONTH) {
                     when (container.day.date) {
                         selectedDate -> {
@@ -138,13 +152,23 @@ class CalendarFragment : Fragment() {
 
                         }
                     }
-                    val listOfDaysUsed = mutableListOf<DayOfWeek>()
-                    for (medRequest in DummyData.medicationRequests) {
-                        for (day in medRequest.scheduledFor) {
-                            listOfDaysUsed.add(day.mapToABP())
+
+                    when {
+                        listWeekDays.contains(container.day.date.dayOfWeek) -> {
+                            container.binding.eventThatDay.background =
+                                resources.getDrawable(R.drawable.yellow_dot, context?.theme)
+                            container.binding.eventThatDay.visibility = View.VISIBLE
+                        }
+                        listOfDates.contains(container.day.date) -> {
+                            container.binding.eventThatDay.background =
+                                resources.getDrawable(R.drawable.example_3_today_bg, context?.theme)
+                            container.binding.eventThatDay.visibility = View.VISIBLE
+                        }
+                        else -> {
+                            container.binding.eventThatDay.visibility = View.GONE
                         }
                     }
-                    if (listOfDaysUsed.contains(container.day.date.dayOfWeek)) {
+                    if (listWeekDays.contains(container.day.date.dayOfWeek)) {
                         container.binding.eventThatDay.visibility = View.VISIBLE
                     } else {
                         container.binding.eventThatDay.visibility = View.GONE
@@ -194,16 +218,18 @@ class CalendarFragment : Fragment() {
                 }
             }
         })
-        medicationViewModel.allAppointments.observe(viewLifecycleOwner, Observer {
-            for (element in DummyData.medicationRequests) {
-                val weekDays = element.scheduledFor.map {
-                    it.mapToABP()
+        medicationViewModel.allMedications.observe(
+            viewLifecycleOwner,
+            Observer { medicationRequests ->
+                for (element in medicationRequests) {
+                    val weekDays = element.scheduledFor.map {
+                        it.mapToABP()
+                    }
+                    if (weekDays.contains(selectedDate!!.dayOfWeek)) {
+                        newData.add(element)
+                    }
                 }
-                if (weekDays.contains(selectedDate!!.dayOfWeek)) {
-                    newData.add(element)
-                }
-            }
-        })
+            })
 
         mAdapter.setData(newData)
     }
