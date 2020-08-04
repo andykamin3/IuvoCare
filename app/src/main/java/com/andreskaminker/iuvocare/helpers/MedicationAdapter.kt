@@ -13,6 +13,7 @@ import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.entities.Config
 import com.andreskaminker.iuvocare.entities.MedicationRequest
 import com.andreskaminker.iuvocare.modules.mapToABP
+import com.andreskaminker.iuvocare.modules.mapToWeekday
 import com.andreskaminker.iuvocare.ui.SeeMedicationFragment
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
@@ -57,7 +58,7 @@ class MedicationAdapter(
             textViewMedicationName.text = medicationList[position].medication
             var weekString = ""
             medicationList[position].scheduledFor.map {
-                weekString += (it.mapToABP()
+                weekString += (mapToWeekday(it).mapToABP()
                     .getDisplayName(TextStyle.FULL, Config.default_locale) + " ")
             }
             deleteButton.setOnClickListener {

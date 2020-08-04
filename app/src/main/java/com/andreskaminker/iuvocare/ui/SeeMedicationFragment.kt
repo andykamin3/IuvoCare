@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.MainActivity
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.entities.MedicationRequest
-import com.andreskaminker.iuvocare.helpers.DummyData
 import com.andreskaminker.iuvocare.helpers.MedicationAdapter
 import com.andreskaminker.iuvocare.modules.MedicationFragmentFunctions
 import com.andreskaminker.iuvocare.room.viewmodel.MedicationViewModel
@@ -51,7 +50,7 @@ class SeeMedicationFragment : Fragment(), MedicationFragmentFunctions {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        medicationList = DummyData.medicationRequests
+        medicationList = mutableListOf()
         medicationAdapter = MedicationAdapter(this)
         recyclerView.apply {
             setHasFixedSize(true)
@@ -62,7 +61,7 @@ class SeeMedicationFragment : Fragment(), MedicationFragmentFunctions {
             viewLifecycleOwner,
             Observer { medicationsList ->
                 medicationsList?.let {
-                    medicationAdapter.setData(medicationsList)
+                    medicationAdapter.setData(it)
                 }
             })
     }

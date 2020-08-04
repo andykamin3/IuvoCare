@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.andreskaminker.iuvocare.modules.mapToABPMonth
 
 @Entity(tableName = "date_results")
 class DateResult {
@@ -27,6 +28,10 @@ class DateResult {
     var mYear: Int? = null
 
     fun retrieveLocalDate(): org.threeten.bp.LocalDate? {
-        return org.threeten.bp.LocalDate.of(this.mYear!!, this.mMonth!!, this.mDay!!)
+        return org.threeten.bp.LocalDate.of(
+            this.mYear!!,
+            this.mMonth?.let { mapToABPMonth(it) }!!,
+            this.mDay!!
+        )
     }
 }

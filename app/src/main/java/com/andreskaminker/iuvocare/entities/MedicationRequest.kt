@@ -1,28 +1,34 @@
 package com.andreskaminker.iuvocare.entities
 
 import androidx.room.*
-import ca.antonious.materialdaypicker.MaterialDayPicker
 import com.andreskaminker.iuvocare.room.converters.KindConverter
 import com.andreskaminker.iuvocare.room.converters.StatusConverter
+import com.andreskaminker.iuvocare.room.converters.WeekListConverter
 
 @Entity(tableName = "medications")
-@TypeConverters(KindConverter::class, StatusConverter::class)
+@TypeConverters(KindConverter::class, StatusConverter::class, WeekListConverter::class)
 class MedicationRequest() : PatientActions("") {
     @ColumnInfo(name = "medId")
     var medId: String = ""
     @PrimaryKey
     @ColumnInfo(name = "medication_name")
     var medication: String = ""
+
     @ColumnInfo(name = "medication_image")
     var imageURL: String = ""
+
     @ColumnInfo(name = "status")
     var status: Status = Status.ACTIVO
+
     @ColumnInfo(name = "kind")
     var kind = ActionKind.MEDICATION
+
     @Embedded
     var patient: Patient = Patient()
-    @Ignore
-    var scheduledFor: List<MaterialDayPicker.Weekday> = emptyList()
+
+    @ColumnInfo(name = "week_day")
+    var scheduledFor: ArrayList<Int> = arrayListOf()
+
     @Embedded
     var takeTime: TimeResult = TimeResult()
 
@@ -30,7 +36,7 @@ class MedicationRequest() : PatientActions("") {
         id: String,
         patient: Patient,
         medicationName: String,
-        scheduledFor: List<MaterialDayPicker.Weekday>,
+        scheduledFor: ArrayList<Int>,
         imageUrl: String,
         takeTime: TimeResult
     ) : this() {

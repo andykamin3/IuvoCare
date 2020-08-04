@@ -34,6 +34,38 @@ fun MaterialDayPicker.Weekday.mapToABP(): DayOfWeek {
     }
 }
 
+fun mapToWeekday(weekday: Int): MaterialDayPicker.Weekday {
+    require(weekday < 8)
+    when (weekday) {
+        MaterialDayPicker.Weekday.MONDAY.ordinal -> {
+            return MaterialDayPicker.Weekday.MONDAY
+        }
+        MaterialDayPicker.Weekday.TUESDAY.ordinal -> {
+            return MaterialDayPicker.Weekday.TUESDAY
+        }
+        MaterialDayPicker.Weekday.WEDNESDAY.ordinal -> {
+            return MaterialDayPicker.Weekday.WEDNESDAY
+        }
+        MaterialDayPicker.Weekday.THURSDAY.ordinal -> {
+            return MaterialDayPicker.Weekday.THURSDAY
+        }
+        MaterialDayPicker.Weekday.FRIDAY.ordinal -> {
+            return MaterialDayPicker.Weekday.FRIDAY
+        }
+        MaterialDayPicker.Weekday.SATURDAY.ordinal -> {
+            return MaterialDayPicker.Weekday.SATURDAY
+        }
+        MaterialDayPicker.Weekday.SUNDAY.ordinal -> {
+            return MaterialDayPicker.Weekday.SUNDAY
+        }
+        else -> {
+            throw  IllegalArgumentException("This is not an ordinal value of MaterialDayPicker Weekday class")
+        }
+
+
+    }
+
+}
 
 fun mapToABPMonth(month: Int): org.threeten.bp.Month {
     return when (month) {

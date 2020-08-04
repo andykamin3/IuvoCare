@@ -20,7 +20,7 @@ object DummyData {
                 "111",
                 currentPatient,
                 "Ritalin 15mg",
-                mutableListOf(MaterialDayPicker.Weekday.MONDAY),
+                arrayListOf(MaterialDayPicker.Weekday.MONDAY.ordinal),
                 "images.jpg",
                 TimeResult(2, 30)
             )
@@ -30,9 +30,9 @@ object DummyData {
                 "111",
                 currentPatient,
                 "Ritalin 16mg",
-                mutableListOf(
-                    MaterialDayPicker.Weekday.FRIDAY,
-                    MaterialDayPicker.Weekday.WEDNESDAY
+                arrayListOf(
+                    MaterialDayPicker.Weekday.FRIDAY.ordinal,
+                    MaterialDayPicker.Weekday.WEDNESDAY.ordinal
                 ),
                 "medic.jpg",
                 TimeResult(10, 15)

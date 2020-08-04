@@ -53,7 +53,7 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     private fun updateUI() {
         val mActivity = requireActivity() as MainActivity
         mActivity.setFabDrawable(R.drawable.ic_baseline_check_24_b)
-        mActivity.setFabColor(R.color.colorGreen)
+        mActivity.setFabColor(R.color.colorAccent)
         mActivity.setFabClickListener {
             addMedication()
         }
@@ -65,7 +65,6 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
             TimePickerFragment()
                 .show(childFragmentManager, "timePicker")
         }
-
         imageButton.setOnClickListener {
             imageSet = true
         }
@@ -80,7 +79,11 @@ class AddMedicationFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         super.onStart()
         val medicationName = nameEditText.text.toString()
         val medicationDescription = descriptionEditText.text.toString()
-        val weekDays = materialPicker.selectedDays
+        val weekDays = arrayListOf<Int>()
+        materialPicker.selectedDays.map {
+            weekDays.add(it.ordinal)
+        }
+
         if (timeSet && medicationName != "" && weekDays.isNotEmpty() && imageSet) {
             val medicationRequest = MedicationRequest(
                 id = "generated",
