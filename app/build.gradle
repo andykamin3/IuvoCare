@@ -9,7 +9,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.andreskaminker.iuvocare"
+        applicationId "com.andreskaminker.iuvohelp"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
