@@ -6,25 +6,31 @@
     app:startDestination="@id/homeTabbedScreen">
     <fragment
         android:id="@+id/addAppointmentFragment"
-        android:name="com.andreskaminker.iuvocare.fragments.AddAppointmentFragment"
+        android:name="com.andreskaminker.iuvocare.ui.AddAppointmentFragment"
         android:label="Agregar Cita Médica"
         tools:layout="@layout/fragment_add_appointment">
         <action
             android:id="@+id/action_addAppointmentFragment_to_addMedicationFragment"
             app:destination="@id/addMedicationFragment" />
+        <action
+            android:id="@+id/action_addAppointmentFragment_to_homeTabbedScreen"
+            app:destination="@id/homeTabbedScreen" />
     </fragment>
     <fragment
         android:id="@+id/addMedicationFragment"
-        android:name="com.andreskaminker.iuvocare.fragments.AddMedicationFragment"
+        android:name="com.andreskaminker.iuvocare.ui.AddMedicationFragment"
         android:label="Agregar Medicación"
         tools:layout="@layout/fragment_add_medication">
         <action
             android:id="@+id/action_addMedicationFragment_to_addAppointmentFragment"
             app:destination="@id/addAppointmentFragment" />
+        <action
+            android:id="@+id/action_addMedicationFragment_to_homeTabbedScreen"
+            app:destination="@id/homeTabbedScreen" />
     </fragment>
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.andreskaminker.iuvocare.fragments.CalendarFragment"
+        android:name="com.andreskaminker.iuvocare.ui.CalendarFragment"
         android:label="Calendario"
         tools:layout="@layout/fragment_calendar">
         <action
@@ -36,12 +42,12 @@
     </fragment>
     <fragment
         android:id="@+id/userConfigFragment"
-        android:name="com.andreskaminker.iuvocare.fragments.UserConfigFragment"
+        android:name="com.andreskaminker.iuvocare.ui.UserConfigFragment"
         android:label="fragment_user_config"
         tools:layout="@layout/fragment_user_config" />
     <fragment
         android:id="@+id/homeTabbedScreen"
-        android:name="com.andreskaminker.iuvocare.fragments.HomeTabbedScreen"
+        android:name="com.andreskaminker.iuvocare.ui.HomeTabbedScreen"
         android:label="Inicio">
         <action
             android:id="@+id/action_homeTabbedScreen_to_userConfigFragment"
@@ -58,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.andreskaminker.iuvocare.fragments.ProfileFragment"
+        android:name="com.andreskaminker.iuvocare.ui.ProfileFragment"
         android:label="Perfil"
         tools:layout="@layout/fragment_profile">
         <action

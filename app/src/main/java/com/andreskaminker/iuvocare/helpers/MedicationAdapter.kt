@@ -3,31 +3,42 @@ package com.andreskaminker.iuvocare.helpers
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.R
-import com.andreskaminker.iuvocare.dtypes.Config
-import com.andreskaminker.iuvocare.dtypes.MedicationRequest
+import com.andreskaminker.iuvocare.entities.Config
+import com.andreskaminker.iuvocare.entities.MedicationRequest
 import com.andreskaminker.iuvocare.modules.mapToABP
+import com.andreskaminker.iuvocare.modules.mapToWeekday
+import com.andreskaminker.iuvocare.ui.SeeMedicationFragment
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import org.threeten.bp.format.TextStyle
 
 class MedicationAdapter(
-    private val medicationList: MutableList<MedicationRequest>,
     val parent: Fragment
 ) :
     RecyclerView.Adapter<MedicationAdapter.MedicationHolder>() {
+    private var medicationList: List<MedicationRequest> = emptyList()
+
     class MedicationHolder(cv: View) : RecyclerView.ViewHolder(cv) {
         val textViewMedicationName: TextView = cv.findViewById(R.id.textViewMedicationName)
         val textViewWeekdays: TextView = cv.findViewById(R.id.textViewMedicationDate)
         val imageView: ImageView = cv.findViewById(R.id.imageViewMedication)
         val textViewTime: TextView = cv.findViewById(R.id.textViewMedicationTime)
         val cardView = cv.findViewById<CardView>(R.id.cardViewMedication)
+        val deleteButton: Button = cv.findViewById(R.id.deleteMedicationButton)
         //TAB
+
+    }
+
+    fun setData(newData: List<MedicationRequest>) {
+        medicationList = newData
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicationHolder {
@@ -47,8 +58,11 @@ class MedicationAdapter(
             textViewMedicationName.text = medicationList[position].medication
             var weekString = ""
             medicationList[position].scheduledFor.map {
-                weekString += (it.mapToABP()
+                weekString += (mapToWeekday(it).mapToABP()
                     .getDisplayName(TextStyle.FULL, Config.default_locale) + " ")
+            }
+            deleteButton.setOnClickListener {
+                (parent as SeeMedicationFragment).deleteMedication(medicationList[position])
             }
             textViewWeekdays.text = weekString
             val imgRef =

@@ -11,4 +11,5 @@
     <color name="colorBlack">#000</color>
     <color name="colorYellow">#FFFF00</color>
     <color name="colorGreen">#4CAF50</color>
+    <color name="materialDanger">#800020</color>
 </resources>

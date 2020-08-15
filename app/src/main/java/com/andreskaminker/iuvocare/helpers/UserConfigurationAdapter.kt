@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.R
-import com.andreskaminker.iuvocare.dtypes.Patient
+import com.andreskaminker.iuvocare.entities.Patient
 
 class UserConfigurationAdapter(private val patientActions: ArrayList<Patient>) :
     RecyclerView.Adapter<UserConfigurationAdapter.UserConfigurationHolder>() {

@@ -42,8 +42,6 @@ class MainActivity : AppCompatActivity(),
                 drawerLayout.open()
             }
         }
-
-
     }
 
     override fun onBackPressed() {

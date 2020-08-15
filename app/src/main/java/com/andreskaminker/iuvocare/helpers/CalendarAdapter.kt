@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.R
 import com.andreskaminker.iuvocare.databinding.CalendarEventMedicineBinding
-import com.andreskaminker.iuvocare.dtypes.ActionKind
-import com.andreskaminker.iuvocare.dtypes.Appointment
-import com.andreskaminker.iuvocare.dtypes.MedicationRequest
-import com.andreskaminker.iuvocare.dtypes.PatientActions
+import com.andreskaminker.iuvocare.entities.Appointment
+import com.andreskaminker.iuvocare.entities.MedicationRequest
+import com.andreskaminker.iuvocare.entities.PatientActions
 
 class CalendarAdapter(var calendarEvents: MutableList<PatientActions>) :
     RecyclerView.Adapter<CalendarAdapter.CalendarElement>() {
@@ -61,6 +60,14 @@ class CalendarAdapter(var calendarEvents: MutableList<PatientActions>) :
 
 
     override fun onBindViewHolder(holder: CalendarElement, position: Int) {
+        if (calendarEvents[position] is Appointment) {
+            holder.renderAppointment(position)
+        } else if (calendarEvents[position] is MedicationRequest) {
+            holder.renderMedication(position)
+        } else {
+            throw IllegalStateException("There should not be other types of elements")
+        }
+        /*
         when (calendarEvents[position].kind) {
             ActionKind.APPOINTMENT -> {
                 holder.renderAppointment(position)
@@ -72,6 +79,8 @@ class CalendarAdapter(var calendarEvents: MutableList<PatientActions>) :
                 throw Exception("There should not be other types of elements other than Appointment and Medication")
             }
         }
+
+         */
     }
 
 }

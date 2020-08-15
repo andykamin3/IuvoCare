@@ -2,16 +2,20 @@ package com.andreskaminker.iuvocare.helpers
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.andreskaminker.iuvocare.databinding.CardAppointmentBinding
-import com.andreskaminker.iuvocare.dtypes.Appointment
+import com.andreskaminker.iuvocare.entities.Appointment
 import com.andreskaminker.iuvocare.modules.FormatUtils
 import com.andreskaminker.iuvocare.modules.mapToABPMonth
+import com.andreskaminker.iuvocare.ui.SeeAppointmentFragment
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 
-class AppointmentAdapter(val appointmentList: MutableList<Appointment>) :
+class AppointmentAdapter(val fragment: Fragment) :
     RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
+    var appointmentList: List<Appointment> = emptyList<Appointment>()
+
     class AppointmentHolder(val binding: CardAppointmentBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -24,25 +28,32 @@ class AppointmentAdapter(val appointmentList: MutableList<Appointment>) :
 
     override fun getItemCount(): Int = appointmentList.size
 
+    fun setData(newData: List<Appointment>) {
+        appointmentList = newData
+        notifyDataSetChanged()
+    }
 
     override fun onBindViewHolder(holder: AppointmentHolder, position: Int) {
         holder.binding.appointmentDescriptionCard.text = appointmentList[position].description
         holder.binding.appointmentTitleCard.text = appointmentList[position].title
         holder.binding.appointmentDateCard.text = formatStringDate(position)
         holder.binding.appointmentTimeCard.text = formatTime(position)
-
+        holder.binding.buttonDelete.setOnClickListener {
+            fragment as SeeAppointmentFragment
+            fragment.deleteAppointment(appointmentList[position])
+        }
     }
 
     private fun formatStringDate(position: Int): String {
         appointmentList[position].scheduledFor.run {
-            val localDate = LocalDate.of(mYear, mapToABPMonth(mMonth), mDay)
+            val localDate = LocalDate.of(mYear!!, mapToABPMonth(mMonth!!), mDay!!)
             return localDate.format(FormatUtils.selectionFormatter)
         }
     }
 
     private fun formatTime(position: Int): String {
         appointmentList[position].scheduledFor.run {
-            val localTime = LocalTime.of(mHour, mMinutes)
+            val localTime = LocalTime.of(mHour!!, mMinutes!!)
             return localTime.format(FormatUtils.timeFormatter)
         }
     }
