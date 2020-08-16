@@ -1,2 +1,2 @@
-include ':app'
+include ':iuvohelp'
 rootProject.name = "IuvoCare"
