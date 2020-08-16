@@ -47,7 +47,7 @@ class SignUpFragment : Fragment() {
             val password = editTextPassword.text.toString().trim()
             val name = editTextName.text.toString().trim()
             if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty()) {
-                if (password.length > 8) {
+                if (password.length >= 8) {
                     createUser(email, password, name)
                 } else {
                     Snackbar.make(
