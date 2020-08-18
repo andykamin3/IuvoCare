@@ -8,10 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.TimePicker
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -21,6 +18,7 @@ import com.andreskaminker.iuvocare.entities.Appointment
 import com.andreskaminker.iuvocare.entities.DateResult
 import com.andreskaminker.iuvocare.entities.Patient
 import com.andreskaminker.iuvocare.helpers.DummyData
+import com.andreskaminker.iuvocare.modules.FormatUtils
 import com.andreskaminker.iuvocare.room.viewmodel.AppointmentViewModel
 import com.andreskaminker.iuvocare.ui.dialogs.DatePickerFragment
 import com.andreskaminker.iuvocare.ui.dialogs.TimePickerFragment
@@ -28,6 +26,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_add_appointment.*
+import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalTime
 
 
 class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
@@ -39,6 +39,8 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     private lateinit var db: FirebaseFirestore
     private lateinit var nameEditText: EditText
     private lateinit var descriptionEditText: EditText
+    private lateinit var showDateText: TextView
+    private lateinit var showTimeText: TextView
 
     private val TAG = "AddAppointmentFragment"
     private var dateResult = DateResult()
@@ -54,6 +56,8 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         timeButton = v.findViewById(R.id.timeButton)
         dateButton = v.findViewById(R.id.dateButton)
         nameEditText = v.findViewById(R.id.editTextMedicationName)
+        showDateText = v.findViewById(R.id.textShowDate)
+        showTimeText = v.findViewById(R.id.textShowTime)
         descriptionEditText = v.findViewById(R.id.editTextMedicationDescription)
 
         return v
@@ -77,6 +81,7 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
             mMinutes = minute
         }
         timeSetted = true
+        textShowTime.text = FormatUtils.timeFormatter.format(LocalTime.of(hourOfDay,minute))
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -87,6 +92,7 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
             mMonth = month
         }
         dateSetted = true
+        textShowDate.text = FormatUtils.selectionFormatter.format(LocalDate.of(year, month, dayOfMonth))
     }
 
     override fun onStart() {
@@ -98,6 +104,7 @@ class AddAppointmentFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         timeButton.setOnClickListener {
             TimePickerFragment()
                 .show(childFragmentManager, "timePicker")
+
         }
 
         super.onStart()

@@ -24,6 +24,8 @@
     <string name="status_placeholder">Completado</string>
     <string name="add_appointment">Agregar una Cita Médica</string>
     <string name="add_doctor_name">Nombre del Médico</string>
+    <string name="need_date">Falta agregar fecha</string>
+    <string name="need_time">Falta agregar hora</string>
     <string name="add_date">Agregar Fecha </string>
     <string name="add_time">Agregar Hora</string>
     <string name="add_date_and_time">Agregar Fecha y Hora</string>
